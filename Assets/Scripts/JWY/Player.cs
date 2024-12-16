@@ -239,14 +239,31 @@ public class Player : Singleton<Player>
 
     private void AnimationCheck()
     {
-        if(myRigidbody.velocity.x != 0)
+        if(myRigidbody.velocity.x != 0 && !storedSnack)
         {
             animator.SetBool("isRun", true);
         }
 
-        if(myRigidbody.velocity.x == 0)
+        if(myRigidbody.velocity.x == 0 && !storedSnack)
         {
             animator.SetBool("isRun", false);
+        }
+
+        if(!storedSnack)
+        {
+            animator.SetBool("isEatIdle", false);
+        }
+
+        if(myRigidbody.velocity.x != 0 && storedSnack)
+        {
+            animator.SetBool("isEatIdle", false);
+            animator.SetBool("isEatRun", true);
+        }
+
+        if(myRigidbody.velocity.x == 0 && storedSnack)
+        {
+            animator.SetBool("isEatRun", false);
+            animator.SetBool("isEatIdle", true);
         }
 
         if(eatingSnack)
