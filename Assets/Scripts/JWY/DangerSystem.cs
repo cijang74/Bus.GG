@@ -5,6 +5,7 @@ using UnityEngine;
 public class DangerSystem : MonoBehaviour
 {
     private Transform target;
+    private Player player; // Player 스크립트 참조
 
     [SerializeField] private float dangerZoneDuration = 2f;
     [SerializeField] private float spawnHeight = 1f;
@@ -78,8 +79,10 @@ public class DangerSystem : MonoBehaviour
     {
         while (true)
         {
-            Drop();
-
+            if (player != null && !player.isSafe)
+            {
+                Drop(); // 플레이어가 안전하지 않을 때만 Drop 실행
+            }
             // 다음 생성까지 대기 (3~5초 사이의 랜덤 값)
             float interval = Random.Range(minSpawnInterval, maxSpawnInterval);
             yield return new WaitForSeconds(interval);
