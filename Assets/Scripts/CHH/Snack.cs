@@ -13,24 +13,31 @@ public class Snack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    //sdf
 
     private void OnCollisionEnter2D(Collision2D other) {
-        //if(other.gameObject.CompareTag("Player"))
-        //{
-        //    Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.collider);
-        //}
-        if (other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("Ground") && !onGround)
         {
-            // 스낵이 이미 땅에 닿았을 경우 추가 동작 방지
-            if (!onGround)
-            {
-                rb.velocity = Vector2.zero;        // 속도 초기화
-                rb.gravityScale = 0f;              // 중력 비활성화
-                this.GetComponent<CircleCollider2D>().isTrigger = true;
-                onGround = true; // 땅에 닿았음을 표시
-                Debug.Log("스낵이 땅에 닿음. onGround: " + onGround);
-            }
+            // 바닥에 닿았을 때
+            rb.velocity = Vector2.zero;        // 속도 초기화
+            rb.gravityScale = 0f;              // 중력 비활성화
+            this.GetComponent<CircleCollider2D>().isTrigger = true;
+            onGround = true;
+            Debug.Log("스낵이 바닥에 닿음.");
+            Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+            Collider2D snackCollider = this.GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(snackCollider, playerCollider, false);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            // 플레이어와 충돌 시 아래로 위치를 조정하여 충돌을 회피
+            transform.position += new Vector3(0, -0.1f, 0); // 살짝 아래로 이동
+            Debug.Log("스낵이 플레이어와 충돌 -> 위치 조정.");
+
+            // 충돌 무시 설정 (계속 떨어지도록)
+            Collider2D playerCollider = other.collider;
+            Collider2D snackCollider = this.GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(snackCollider, playerCollider, true);
+
         }
     }
 
