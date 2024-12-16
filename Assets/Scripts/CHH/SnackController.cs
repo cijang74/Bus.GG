@@ -93,9 +93,9 @@ public class SnackController : MonoBehaviour
                 return;
             }
         }while(!canSpawnPoint[arrayX - leftRange]);                             //해당 좌표에 간식이 없으면
-        canSpawnPoint[arrayX - leftRange] = false;
+        canSpawnPoint[arrayX - leftRange] = false;                              //해당 좌표에 간식 있다고 표시
 
-        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);
+        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);                 
 
         Instantiate(toSpawnSnack, spawnPoint, Quaternion.identity);
     }
