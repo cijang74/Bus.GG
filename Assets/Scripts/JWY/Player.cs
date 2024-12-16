@@ -116,15 +116,13 @@ public class Player : MonoBehaviour
 
     private void EatSnack()
     {
-        if (storedSnack != null)
+        if(nearbySnack != null)
         {
-            full += storedSnack.GetWeight(); // 포만감 증가
+            full += nearbySnack.GetWeight();    // 포만감 증가
             Debug.Log("스낵 먹음. 포만감: " + full);
-            storedSnack = null; // 저장된 스낵 비움
-        }
-        else
-        {
-            Debug.Log("저장된 스낵이 없습니다!");
+
+            Destroy(nearbySnack.gameObject);
+            nearbySnack = null;
         }
     }
 
