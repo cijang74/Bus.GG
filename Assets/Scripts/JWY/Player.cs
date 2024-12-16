@@ -110,11 +110,11 @@ public class Player : MonoBehaviour
             if (full > 0)
             {
                 full -= 1;
-                //Debug.Log("포만감 감소: " + full);
+                Debug.Log("포만감 감소: " + full);
             }
             else
             {
-                //Debug.Log("포만감이 0입니다.");
+                Debug.Log("포만감이 0입니다.");
             }
 
             timeSineLastDecrease = 0f;
