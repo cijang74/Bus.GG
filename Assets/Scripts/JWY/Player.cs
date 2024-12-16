@@ -248,5 +248,15 @@ public class Player : Singleton<Player>
         {
             animator.SetBool("isRun", false);
         }
+
+        if(eatingSnack)
+        {
+            animator.SetBool("isEat", true);
+        }
+
+        if(!eatingSnack)
+        {
+            animator.SetBool("isEat", false);
+        }
     }
 }
