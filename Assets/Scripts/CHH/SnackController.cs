@@ -47,7 +47,7 @@ public class SnackController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             timer += 0.1f;
-            Debug.Log(Math.Round(timer, 1));
+            //Debug.Log(Math.Round(timer, 1));
         }        
     }
 
