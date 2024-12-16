@@ -69,7 +69,6 @@ public class TunnelManager : Singleton<TunnelManager>
 
         while (remainingTime > 0)
         {
-            Debug.Log($"{remainingTime:F1}초 남음..");
             yield return new WaitForSeconds(1f);
             remainingTime -= 1f;
         }
