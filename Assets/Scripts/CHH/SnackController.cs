@@ -25,7 +25,7 @@ public class SnackController : MonoBehaviour
 
     float left;
     float right;
-    float spawnGap;
+    float spawnGap = 0.1f;
     
     int leftRange;
     int rightRange;
@@ -59,9 +59,9 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        spawnGap = mouse.localScale.x + snack5.transform.localScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
-        left = bus.GetChild(1).position.x - (bus.GetChild(1).localScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
-        right = bus.GetChild(1).position.x + (bus.GetChild(1).localScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
+        //spawnGap = mouse.lossyScale.x + snack5.transform.lossyScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
+        left = bus.GetChild(1).position.x - (bus.GetChild(1).lossyScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+        right = bus.GetChild(1).position.x + (bus.GetChild(1).lossyScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
         leftRange = Calc(left, spawnGap);                               //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
         rightRange = Calc(right, spawnGap);                             //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
@@ -116,10 +116,10 @@ public class SnackController : MonoBehaviour
         int seatRightIndex;
         for(int i = 0; i < seatCount; i++)
         {
-            seatLeft[i] = seat[i].position.x - (seat[i].localScale.x / 2);
-            seatRight[i] = seat[i].position.x + (seat[i].localScale.x / 2);
-            seatLeftIndex = Calc(seatLeft[i] , spawnGap) - leftRange;
-            seatRightIndex = Calc(seatRight[i] , spawnGap) - leftRange;
+            seatLeft[i] = seat[i].position.x - (seat[i].lossyScale.x / 2);
+            seatRight[i] = seat[i].position.x + (seat[i].lossyScale.x / 2);
+            seatLeftIndex = Convert.ToInt32(Math.Round(seatLeft[i] / spawnGap)) - leftRange;
+            seatRightIndex = Convert.ToInt32(Math.Round(seatRight[i] / spawnGap)) - leftRange;
             
             for(int j = seatLeftIndex; j <= seatRightIndex; j++)
             {
@@ -157,7 +157,7 @@ public class SnackController : MonoBehaviour
                 float shadowScaleY = seat[i].position.y - busGroundY;
                 
                 shadowPrefab.transform.position = new Vector2(seat[i].position.x, shadowPosY);
-                shadowPrefab.transform.localScale = new Vector2(seat[i].localScale.x / 3.5f, shadowScaleY);
+                shadowPrefab.transform.localScale = new Vector2(seat[i].lossyScale.x, shadowScaleY);
 
                 Instantiate(shadowPrefab);
             }
