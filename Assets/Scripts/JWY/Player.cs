@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Player : Singleton<Player>
 {
     [SerializeField] public float runSpeed = 10f;
-    [SerializeField] public float full = 100f;     //포만감, 계속해서 감소
+    [SerializeField] public int full = 100;     //포만감, 계속해서 감소
     [SerializeField] private float decreaseInterval = 1f;   //포만감 감소 간격(초)
 
     bool eatingSnack = false;
@@ -187,7 +187,7 @@ public class Player : Singleton<Player>
             snackController.GetComponent<SnackController>().CatchedSnack(Snacked.gameObject);
         }
 
-        full = Mathf.Min(full + Snacked.GetWeight(), 100f);    // 포만감 증가, 최대값 100 유지
+        full = Mathf.Min(full + Snacked.GetWeight(), 100);    // 포만감 증가, 최대값 100 유지
         Debug.Log("스낵 먹음. 포만감: " + full);
 
         Destroy(Snacked.gameObject);
@@ -215,5 +215,10 @@ public class Player : Singleton<Player>
             Debug.Log("사망!");
             SceneManager.LoadScene("Ending");
         }
+    }
+
+    public int GetFull()
+    {
+        return full;
     }
 }
