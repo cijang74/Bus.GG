@@ -87,12 +87,12 @@ public class SnackController : MonoBehaviour
         int count = 0;
         do
         {
-            arrayX = UnityEngine.Random.Range(leftRange, rightRange + 1);
-            if(count++ > arrayRange)
+            arrayX = UnityEngine.Random.Range(leftRange, rightRange + 1);       //가능한 좌표 중 랜덤으로 하나
+            if(count++ > arrayRange)                                            //모든 가능한 좌표에 이미 간식이 있으면 안떨어짐
             {
                 return;
             }
-        }while(!canSpawnPoint[arrayX - leftRange]);
+        }while(!canSpawnPoint[arrayX - leftRange]);                             //해당 좌표에 간식이 없으면
         canSpawnPoint[arrayX - leftRange] = false;
 
         Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);
@@ -102,10 +102,10 @@ public class SnackController : MonoBehaviour
 
     private void CheckSeat()
     {
-        int seatCount = seat.Length;
-        float seatLeft;
-        float seatRight;
-        int seatLeftIndex;
+        int seatCount = seat.Length;        //좌석의 갯수
+        float seatLeft;                     //좌석의 좌측좌표
+        float seatRight;                    //좌석의 우측좌표
+        int seatLeftIndex;                  //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
         int seatRightIndex;
         for(int i = 0; i < seatCount; i++)
         {
@@ -116,14 +116,14 @@ public class SnackController : MonoBehaviour
             
             for(int j = seatLeftIndex; j <= seatRightIndex; j++)
             {
-                canSpawnPoint[j] = false;
+                canSpawnPoint[j] = false;       //해당 좌석의 좌측과 우측 사이에 위치한 좌표는 못 떨어지도록
             }
         }
     }
 
     private void ChooseSpawnSnack()
     {
-        int whatSnackNum = UnityEngine.Random.Range(1,6);
+        int whatSnackNum = UnityEngine.Random.Range(1,6);   //간식 1~5, 잼 중 랜덤
         if(whatSnackNum == 1)
         {
             toSpawnSnack = snack1;
