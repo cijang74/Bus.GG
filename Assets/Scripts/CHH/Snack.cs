@@ -6,6 +6,7 @@ public class Snack : MonoBehaviour
 {
     [SerializeField] GameObject snackPrefab;
     [SerializeField] int weight;
+    [SerializeField] float timeToEat;
     private Rigidbody2D rb;
     private bool onGround = false;
 
@@ -13,7 +14,6 @@ public class Snack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    //sdf
 
     private void OnCollisionEnter2D(Collision2D other) {
         //if(other.gameObject.CompareTag("Player"))
@@ -38,6 +38,11 @@ public class Snack : MonoBehaviour
     public int GetWeight()
     {
         return weight;
+    }
+
+    public float GetTimeToEat()
+    {
+        return timeToEat;
     }
 
     public void Consume()
