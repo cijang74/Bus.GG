@@ -437,4 +437,4 @@ MonoBehaviour:
   audioSource3: {fileID: 4615261050349834333}
   jam: {fileID: 8300000, guid: 485fbc0c7c592684b84d2f1d6584e60f, type: 3}
   crash: {fileID: 8300000, guid: 32b474e316129904295dfea071f6a3ac, type: 3}
-  eat: {fileID: 8300000, guid: 8a2631abf2592ca47a2deb030784a1c6, type: 3}
+  eat: {fileID: 8300000, guid: 25c883c5f13ee98498d9408e34315b72, type: 3}
