@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/JWY/DescriptionScene.unity
+    guid: 0a32a3e3d46f9714aa58836d3f6a9f3b
+  - enabled: 1
+    path: Assets/Scenes/JWY/DescriptionScene 2.unity
+    guid: 5b31a4964eacc7147847bebc146fd4d9
+  - enabled: 1
     path: Assets/Scenes/JWY/Ending.unity
     guid: 9019ce304c94adc4ba287997f3ece095
   m_configObjects:
