@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,19 +7,19 @@ public class StartMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene"); // "GameScene"Àº °ÔÀÓ ¾ÀÀÇ ÀÌ¸§ÀÔ´Ï´Ù.
-        Debug.Log("°ÔÀÓ ½ÃÀÛ!");
+        SceneManager.LoadScene("GameScene"); // "GameScene"ì€ ê²Œì„ ì”¬ì˜ ì´ë¦„ì…ë‹ˆë‹¤.
+        Debug.Log("ê²Œì„ ì‹œì‘!");
     }
 
-    // °ÔÀÓ ¼³¸í ¹öÆ°
+    // ê²Œì„ ì„¤ëª… ë²„íŠ¼
     public void ShowGameDescription()
     {
-        SceneManager.LoadScene("DescriptionScene"); // "DescriptionScene"Àº °ÔÀÓ ¼³¸í ¾ÀÀÇ ÀÌ¸§ÀÔ´Ï´Ù.
-        Debug.Log("°ÔÀÓ ¼³¸í º¸±â!");
+        SceneManager.LoadScene("DescriptionScene"); // "DescriptionScene"ì€ ê²Œì„ ì„¤ëª… ì”¬ì˜ ì´ë¦„ì…ë‹ˆë‹¤.
+        Debug.Log("ê²Œì„ ì„¤ëª… ë³´ê¸°!");
     }
     public void QuitGame()
     {
-        Debug.Log("°ÔÀÓ Á¾·á!");
-        Application.Quit(); // °ÔÀÓ Á¾·á
+        Debug.Log("ê²Œì„ ì¢…ë£Œ!");
+        Application.Quit(); // ê²Œì„ ì¢…ë£Œ
     }
 }

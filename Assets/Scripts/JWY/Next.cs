@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +7,7 @@ public class Next : MonoBehaviour
 {
     public void NextDe()
     {
-        SceneManager.LoadScene("Description Scene 2"); // "GameScene"Àº °ÔÀÓ ¾ÀÀÇ ÀÌ¸§ÀÔ´Ï´Ù.
-        Debug.Log("°ÔÀÓ ½ÃÀÛ!");
+        SceneManager.LoadScene("DescriptionScene 1"); // "GameScene"ì€ ê²Œì„ ì”¬ì˜ ì´ë¦„ì…ë‹ˆë‹¤.
+        Debug.Log("ê²Œì„ ì‹œì‘!");
     }
 }
