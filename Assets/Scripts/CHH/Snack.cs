@@ -13,6 +13,7 @@ public class Snack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    //sdf
 
     private void OnCollisionEnter2D(Collision2D other) {
         //if(other.gameObject.CompareTag("Player"))
