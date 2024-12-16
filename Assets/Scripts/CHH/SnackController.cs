@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class SnackController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class SnackController : MonoBehaviour
     [SerializeField] GameObject snack4;
     [SerializeField] GameObject snack5;
     [SerializeField] GameObject jam;
+
+    [SerializeField] GameObject shadowPrefab;
 
     int whatSnackNum;
     GameObject toSpawnSnack;
@@ -46,6 +49,7 @@ public class SnackController : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnTimer());
+        UpdateShadowUI(true);
     }
 
     private int Calc(float a, float b)  //a를 b로 나눠서 나머지 버리고 int로 변환해주는 함수
@@ -130,6 +134,32 @@ public class SnackController : MonoBehaviour
         }
     }
 
+    public void UpdateShadowUI(bool a)
+    {
+        if(a)
+        {
+            for(int i = 0; i < seat.Length; i++)
+            {
+                float busGroundY = bus.GetChild(0).position.y;
+                float shadowPosY = (seat[i].position.y + busGroundY) / 2;
+                float shadowScaleY = seat[i].position.y - busGroundY;
+                
+                shadowPrefab.transform.position = new Vector2(seat[i].position.x, shadowPosY);
+                shadowPrefab.transform.localScale = new Vector2(seat[i].localScale.x, shadowScaleY);
+
+                Instantiate(shadowPrefab);
+            }
+        }
+        else
+        {
+            GameObject[] shadow = GameObject.FindGameObjectsWithTag("Shadow");
+            for(int i = 0; i < seat.Length; i++)
+            {
+                Destroy(shadow[i]);
+            }
+        }
+    }
+
     private void ChooseSpawnSnack()
     {
         int whatSnackNum = UnityEngine.Random.Range(1, 7);   //간식 1~5, 잼 중 랜덤
@@ -168,10 +198,10 @@ public class SnackController : MonoBehaviour
     {
         return seatRight;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - OutSide
   - Tunnel
+  - Shadow
   layers:
   - Default
   - TransparentFX
