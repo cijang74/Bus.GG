@@ -7,7 +7,7 @@ public class BackGroundManage : MonoBehaviour
     [SerializeField] public bool isEnterTunnel = false;
     [SerializeField] public bool isExitTunnel = false;
 
-    private void Update() 
+    private void FixedUpdate() 
     {
         ActiveEnterTunnel();
         ActiveExitTunnel();

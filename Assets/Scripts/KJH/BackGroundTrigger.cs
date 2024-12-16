@@ -9,14 +9,15 @@ public class BackGroundTrigger : MonoBehaviour
 
     private void Awake()
     {
-        startMovementVec = new Vector3(44f, transform.position.y, transform.position.z); // 최신화할 위치 입력
+        startMovementVec = new Vector3(51.2f, transform.position.y, transform.position.z); // 최신화할 위치 입력d
         movementVec = startMovementVec;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void Update() 
     {
-        if (other.CompareTag("MainCamera"))
+        if (gameObject.transform.position.x < -25.6f)
         {
+<<<<<<< Updated upstream
             //Debug.Log("범위 벗어남");
             transform.position = movementVec;
         }
@@ -25,18 +26,22 @@ public class BackGroundTrigger : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) 
     {
         //Debug.Log("범위 포함됨");
+=======
+            transform.position = movementVec;
+        }   
+>>>>>>> Stashed changes
     }
 
     public void RunEnterTunnel() // 터널 들어갔을 때
     {
         if(gameObject.tag == "OutSide")
         {
-            movementVec = new Vector3(44f, transform.position.y, 10f);
+            movementVec = new Vector3(51.2f, transform.position.y, 10f);
         }
 
         if(gameObject.tag == "Tunnel")
         {
-            movementVec = new Vector3(44f, transform.position.y, 0f);
+            movementVec = new Vector3(51.2f, transform.position.y, 0f);
         }
     }
 

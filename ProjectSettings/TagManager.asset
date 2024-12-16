@@ -9,6 +9,8 @@ TagManager:
   - OutSide
   - Tunnel
   - Shadow
+  - TunnelEnterence
+  - Confinder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - MiniMap
   - BackGround
   - Camera
-  - 
+  - Confinder
   - 
   - 
   - 

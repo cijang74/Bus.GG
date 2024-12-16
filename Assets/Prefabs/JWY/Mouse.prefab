@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.16, y: -2.56, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.13220884, y: 0.09259772, z: 0.13220884}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,9 +76,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.45098042, g: 0.45098042, b: 0.45098042, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,9 +120,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
-  m_Direction: 0
+  m_Offset: {x: 0.0000000020602684, y: 0.02467595}
+  m_Size: {x: 1.0000004, y: 0.95071393}
+  m_Direction: 1
 --- !u!50 &6645614644883517379
 Rigidbody2D:
   serializedVersion: 4
@@ -192,6 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04c1e9a9cb14c14e831b448ee753989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 10
+  runSpeed: 1
   full: 100
   decreaseInterval: 1

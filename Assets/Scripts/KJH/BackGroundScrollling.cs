@@ -33,6 +33,12 @@ public class BackGroundScrollling : MonoBehaviour
             for (int i = 0; i < backgroundImages.Length; i++) // 배경화면 왼쪽으로 스크롤
             {
                 backgroundImages[i].position -= scrollVec * Time.deltaTime;
+
+                backgroundImages[i].position = new Vector3(
+                Mathf.Round(backgroundImages[i].position.x * 1000f) / 1000f,
+                backgroundImages[i].position.y,
+                backgroundImages[i].position.z
+                );
             }
             yield return null;
         }
