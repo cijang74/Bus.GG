@@ -17,14 +17,14 @@ public class BackGroundTrigger : MonoBehaviour
     {
         if (other.CompareTag("MainCamera"))
         {
-            Debug.Log("범위 벗어남");
+            //Debug.Log("범위 벗어남");
             transform.position = movementVec;
         }
     }
 
     private void OnTriggerStay2D(Collider2D other) 
     {
-        Debug.Log("범위 포함됨");
+        //Debug.Log("범위 포함됨");
     }
 
     public void RunEnterTunnel() // 터널 들어갔을 때

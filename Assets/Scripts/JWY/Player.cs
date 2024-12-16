@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     bool eatingSnack = false;
     float initialRunSpeed;
+    float jamDownSpeed = 0.2f;
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
@@ -102,6 +103,11 @@ public class Player : MonoBehaviour
             {
                 nearbySnack = snack;
                 Debug.Log("스낵 근처: " + snack.name);
+
+                if(nearbySnack.GetWeight() == 6)        //잼이라면
+                {
+                    runSpeed -= jamDownSpeed;
+                }
             }
         }
     }
@@ -110,6 +116,11 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Snack"))
         {
+            if(nearbySnack.GetWeight() == 6)        //잼이라면
+            {
+                runSpeed += jamDownSpeed;
+            }
+
             nearbySnack = null; // 닿아있는 스낵 초기화
             eatingSnack = false;
             Debug.Log("스낵 멀어짐");
@@ -120,10 +131,13 @@ public class Player : MonoBehaviour
     {
         if (storedSnack == null && nearbySnack != null)
         {
-            storedSnack = nearbySnack;
-            storedSnack.Consume();
-            Debug.Log("스낵 저장: " + storedSnack.name);
-            runSpeed -= (initialRunSpeed / 10 * storedSnack.GetWeight());
+            if(nearbySnack.GetWeight() != 6)
+            {
+                storedSnack = nearbySnack;
+                storedSnack.Consume();
+                Debug.Log("스낵 저장: " + storedSnack.name);
+                runSpeed -= (initialRunSpeed / 10 * storedSnack.GetWeight());
+            }
         }
         else if (storedSnack != null)
         {
@@ -135,8 +149,11 @@ public class Player : MonoBehaviour
     {
         if(nearbySnack != null && storedSnack == null && !eatingSnack)
         {
-            eatingSnack = true;
-            StartCoroutine(EatSnackCour());
+            if(nearbySnack.GetWeight() != 6)
+            {
+                eatingSnack = true;
+                StartCoroutine(EatSnackCour());
+            }
         }
     }
 
