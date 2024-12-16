@@ -38,9 +38,13 @@ public class SnackController : MonoBehaviour
     bool[] canSpawnPoint;       //-8 ~ 8에 간격 1이라면 index 0번은 -8을 가리킴. 위치 - left = index
 
 
-    void Start()
+    void Awake()
     {
         InitSpawnPointArray();
+    }
+
+    void Start()
+    {
         StartCoroutine(SpawnTimer());
     }
 

@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         snackController = GameObject.Find("SnackController");
         initialRunSpeed = runSpeed;
-        StartCoroutine(InitSafetyZone());
+        InitSafetyZone();
     }
 
     void Update()
@@ -83,9 +83,8 @@ public class Player : MonoBehaviour
         myRigidbody.velocity = playerVelocity;
     }
 
-    private IEnumerator InitSafetyZone()
+    private void InitSafetyZone()
     {
-        yield return new WaitForSeconds(0.1f);
         seatLeft = snackController.GetComponent<SnackController>().GetSeatLeft();
         seatRight = snackController.GetComponent<SnackController>().GetSeatRight();
     }
