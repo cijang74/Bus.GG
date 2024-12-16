@@ -17,19 +17,9 @@ public class BackGroundTrigger : MonoBehaviour
     {
         if (gameObject.transform.position.x < -25.6f)
         {
-<<<<<<< Updated upstream
             //Debug.Log("범위 벗어남");
             transform.position = movementVec;
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D other) 
-    {
-        //Debug.Log("범위 포함됨");
-=======
-            transform.position = movementVec;
-        }   
->>>>>>> Stashed changes
     }
 
     public void RunEnterTunnel() // 터널 들어갔을 때
