@@ -378,6 +378,7 @@ MonoBehaviour:
   snack3: {fileID: 8284505779185992780, guid: 1b88aacee625d924395f859a96b74ed4, type: 3}
   snack4: {fileID: 8919354751561545561, guid: 3c8db454017e06940ac19beb8c9006e4, type: 3}
   snack5: {fileID: 3686922298392650859, guid: b57d2fafd63abf74780f7869b06f309b, type: 3}
+  jam: {fileID: 3686922298392650859, guid: 898bf4ac0e1bd0040b9ca3d312fb264f, type: 3}
 --- !u!4 &2052980602
 Transform:
   m_ObjectHideFlags: 0
