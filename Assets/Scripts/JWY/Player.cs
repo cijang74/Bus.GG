@@ -105,6 +105,7 @@ public class Player : MonoBehaviour
         if (storedSnack == null && nearbySnack != null)
         {
             storedSnack = nearbySnack;
+            storedSnack.Consume();
             Debug.Log("스낵 저장: " + storedSnack.name);
         }
         else if (storedSnack != null)
