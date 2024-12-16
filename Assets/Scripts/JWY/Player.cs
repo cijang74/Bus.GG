@@ -51,6 +51,7 @@ public class Player : Singleton<Player>
         DecreaseFullness();
         AnimationCheck();
         CheckDeadPlayer();
+        Debug.Log(isSafe);
 
         if (nearbySnack != null)
         {
