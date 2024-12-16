@@ -12,8 +12,8 @@ public class Player : Singleton<Player>
     [SerializeField] private float decreaseInterval = 1f;   //포만감 감소 간격(초)
 
     bool eatingSnack = false;
-    float jamDownSpeed = 0.2f;
 
+    Animator animator;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     SpriteRenderer mySpriteRenderer;
@@ -32,6 +32,7 @@ public class Player : Singleton<Player>
     protected override void Awake()
     {
         base.Awake();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -48,6 +49,7 @@ public class Player : Singleton<Player>
         FlipSprite();
         CheckIsInSafetyZone();
         DecreaseFullness();
+        AnimationCheck();
         CheckDeadPlayer();
 
         if (nearbySnack != null)
@@ -233,5 +235,18 @@ public class Player : Singleton<Player>
     public int GetFull()
     {
         return full;
+    }
+
+    private void AnimationCheck()
+    {
+        if(myRigidbody.velocity.x != 0)
+        {
+            animator.SetBool("isRun", true);
+        }
+
+        if(myRigidbody.velocity.x == 0)
+        {
+            animator.SetBool("isRun", false);
+        }
     }
 }
