@@ -31,7 +31,7 @@ public class Jam : MonoBehaviour
             }
 
             // 자식 오브젝트의 CircleCollider2D를 찾아 트리거로 변경
-            CircleCollider2D childCollider = GetComponentInChildren<CircleCollider2D>();
+            BoxCollider2D childCollider = GetComponentInChildren<BoxCollider2D>();
             if (childCollider != null)
             {
                 childCollider.isTrigger = true; // 트리거로 변경
