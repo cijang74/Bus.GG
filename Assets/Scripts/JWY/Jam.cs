@@ -20,7 +20,7 @@ public class Jam : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && !isOnGround)
         {
-            Debug.Log("Jam이 땅에 닿았습니다!");
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayJamSound();
 
             // Rigidbody 속도 초기화 및 트리거 설정
             if (rb != null)

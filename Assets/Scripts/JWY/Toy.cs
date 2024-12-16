@@ -38,7 +38,7 @@ public class Toy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") && !isFading)
         {
-            Debug.Log("Toy가 Ground에 닿았습니다!");
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayCrashSound();
 
             // Rigidbody 동작 멈추기
             if (rb != null)

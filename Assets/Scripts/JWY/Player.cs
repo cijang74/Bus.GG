@@ -195,6 +195,8 @@ public class Player : Singleton<Player>
     private IEnumerator EatSnackCour()
     {   
         Snack Snacked = nearbySnack;
+        
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEatSound();
         yield return new WaitForSeconds(Snacked.GetTimeToEat());
 
         if (snackController != null)
