@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Toy : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class Toy : MonoBehaviour
         {
             // 플레이어와 충돌 시
             Debug.Log("사망!");
+            SceneManager.LoadScene("Ending");
         }
     }
 

@@ -663,6 +663,55 @@ Transform:
   - {fileID: 325738571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1254248133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1254248135}
+  - component: {fileID: 1254248134}
+  m_Layer: 0
+  m_Name: DangerSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1254248134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254248133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129cf6f1c2b20a3489b7f578d5d706d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerZoneDuration: 2
+  spawnHeight: 1.5
+  ToyPrefab: {fileID: 9111489794268239086, guid: f6b13517a1223ad4f810f7b571a87b74, type: 3}
+  minSpawnInterval: 5
+  maxSpawnInterval: 10
+--- !u!4 &1254248135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254248133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5133269, y: -15.527444, z: -0.02913303}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1343309522
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +796,10 @@ PrefabInstance:
       propertyPath: bus
       value: 
       objectReference: {fileID: 1797920300}
+    - target: {fileID: 2562008512149284389, guid: 6fbbc094aba68cb499ccec0a08f44cf2, type: 3}
+      propertyPath: mouse
+      value: 
+      objectReference: {fileID: 1595423609}
     - target: {fileID: 4968119685828807852, guid: 6fbbc094aba68cb499ccec0a08f44cf2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1565,3 +1618,4 @@ SceneRoots:
   - {fileID: 7258920674551217937}
   - {fileID: 1699703082}
   - {fileID: 1464960671}
+  - {fileID: 1254248135}
