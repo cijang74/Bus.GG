@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,23 +16,31 @@ public class Player : MonoBehaviour
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
+    GameObject snackController;
     private float timeSineLastDecrease = 0f;
 
     private Snack snack;
     private Snack nearbySnack = null;   //닿아있는 스낵
     private Snack storedSnack = null;   //저장된 스낵
 
+    private float[] seatLeft;
+    private float[] seatRight;
+    private bool isSafe = false;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        snackController = GameObject.Find("SnackController");
         initialRunSpeed = runSpeed;
+        StartCoroutine(InitSafetyZone());
     }
 
     void Update()
     {
         Run();
+        CheckIsInSafetyZone();
         DecreaseFullness();
+        Debug.Log(isSafe);
 
         if (nearbySnack != null)
         {
@@ -72,6 +81,26 @@ public class Player : MonoBehaviour
         }
 
         myRigidbody.velocity = playerVelocity;
+    }
+
+    private IEnumerator InitSafetyZone()
+    {
+        yield return new WaitForSeconds(0.1f);
+        seatLeft = snackController.GetComponent<SnackController>().GetSeatLeft();
+        seatRight = snackController.GetComponent<SnackController>().GetSeatRight();
+    }
+
+    private void CheckIsInSafetyZone()
+    {
+        for(int i = 0; i < seatLeft.Length; i++)
+        {
+            if(seatLeft[i] < this.transform.position.x && this.transform.position.x < seatRight[i])
+            {
+                isSafe = true;
+                return;
+            }
+        }
+        isSafe = false;
     }
 
     private void DecreaseFullness()
@@ -163,7 +192,6 @@ public class Player : MonoBehaviour
         full = Mathf.Min(full + nearbySnack.GetWeight(), 100f);    // 포만감 증가, 최대값 100 유지
         Debug.Log("스낵 먹음. 포만감: " + full);
 
-        GameObject snackController = GameObject.Find("SnackController");
         if (snackController != null)
         {
             snackController.GetComponent<SnackController>().CatchedSnack(nearbySnack.gameObject);

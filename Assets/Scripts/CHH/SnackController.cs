@@ -8,6 +8,7 @@ public class SnackController : MonoBehaviour
 {
     [SerializeField] Transform bus;
     [SerializeField] Transform mouse;
+    [SerializeField] Transform[] seat;
 
     [SerializeField] GameObject snack1;
     [SerializeField] GameObject snack2;
@@ -27,10 +28,12 @@ public class SnackController : MonoBehaviour
     int rightRange;
     int arrayRange;
 
+    float[] seatLeft;
+    float[] seatRight;
+
     float minSpawnDelay = 1f;
     float maxSpawnDelay = 5f;
 
-    [SerializeField] Transform[] seat;
 
     bool[] canSpawnPoint;       //-8 ~ 8에 간격 1이라면 index 0번은 -8을 가리킴. 위치 - left = index
 
@@ -62,6 +65,8 @@ public class SnackController : MonoBehaviour
         {
             canSpawnPoint[i] = true;                                //모든 좌표에 떨어질 수 있게 초기화
         }
+
+        CheckSeat();                                                //좌석 밑으로는 생성되지 않도록
     }
 
     private IEnumerator SpawnTimer()
@@ -82,7 +87,6 @@ public class SnackController : MonoBehaviour
     private void SpawnSnack()
     {
         ChooseSpawnSnack();
-        CheckSeat();
 
         int arrayX;
         int count = 0;
@@ -103,17 +107,17 @@ public class SnackController : MonoBehaviour
 
     private void CheckSeat()
     {
-        int seatCount = seat.Length;        //좌석의 갯수
-        float seatLeft;                     //좌석의 좌측좌표
-        float seatRight;                    //좌석의 우측좌표
-        int seatLeftIndex;                  //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
+        int seatCount = seat.Length;                                //좌석의 갯수
+        seatLeft = new float[seatCount];                    //좌석의 좌측좌표
+        seatRight = new float[seatCount];                   //좌석의 우측좌표
+        int seatLeftIndex;                                          //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
         int seatRightIndex;
         for(int i = 0; i < seatCount; i++)
         {
-            seatLeft = seat[i].position.x - (seat[i].localScale.x / 2);
-            seatRight = seat[i].position.x + (seat[i].localScale.x / 2);
-            seatLeftIndex = Calc(seatLeft , spawnGap) - leftRange;
-            seatRightIndex = Calc(seatRight , spawnGap) - leftRange;
+            seatLeft[i] = seat[i].position.x - (seat[i].localScale.x / 2);
+            seatRight[i] = seat[i].position.x + (seat[i].localScale.x / 2);
+            seatLeftIndex = Calc(seatLeft[i] , spawnGap) - leftRange;
+            seatRightIndex = Calc(seatRight[i] , spawnGap) - leftRange;
             
             for(int j = seatLeftIndex; j <= seatRightIndex; j++)
             {
@@ -149,6 +153,16 @@ public class SnackController : MonoBehaviour
         {
             toSpawnSnack = jam;
         }
+    }
+
+    public float[] GetSeatLeft()
+    {
+        return seatLeft;
+    }
+
+    public float[] GetSeatRight()
+    {
+        return seatRight;
     }
 
     // Update is called once per frame
