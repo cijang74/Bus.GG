@@ -23,7 +23,6 @@ public class Snack : MonoBehaviour
             rb.gravityScale = 0f;              // 중력 비활성화
             this.GetComponent<CircleCollider2D>().isTrigger = true;
             onGround = true;
-            Debug.Log("스낵이 바닥에 닿음.");
             Collider2D playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
             Collider2D snackCollider = this.GetComponent<Collider2D>();
             Physics2D.IgnoreCollision(snackCollider, playerCollider, false);

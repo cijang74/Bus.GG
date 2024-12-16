@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
         Run();
         CheckIsInSafetyZone();
         DecreaseFullness();
-        Debug.Log(isSafe);
 
         if (nearbySnack != null)
         {
@@ -203,7 +202,7 @@ public class Player : MonoBehaviour
 
     private void SpitOutSnack()
     {
-        if (storedSnack != null)
+        if (storedSnack != null && isSafe)
         {
             // 플레이어 위치 기준으로 스낵을 뱉음
             Vector3 spitPosition = transform.position + new Vector3(storedSnack.transform.localScale.x, storedSnack.transform.localScale.y, 0f); // 플레이어 오른쪽에 스낵을 뱉음
@@ -212,10 +211,5 @@ public class Player : MonoBehaviour
             runSpeed = initialRunSpeed;
             storedSnack = null;
         }
-        else
-        {
-            Debug.Log("저장된 스낵이 없습니다!");
-        }
     }
-
 }

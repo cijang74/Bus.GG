@@ -55,22 +55,22 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        spawnGap = mouse.localScale.x;                              //최소 스폰 간격은 쥐의 크기 (x좌표)
-        left = bus.position.x - (bus.localScale.x / 2) + spawnGap;  //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
-        right = bus.position.x + (bus.localScale.x / 2) - spawnGap; //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
+        spawnGap = mouse.localScale.x + snack5.transform.localScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
+        left = bus.position.x - (bus.localScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+        right = bus.position.x + (bus.localScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
-        leftRange = Calc(left, spawnGap);                           //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
-        rightRange = Calc(right, spawnGap);                         //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
-        arrayRange = rightRange - leftRange + 1;                    //떨어질 수 있는 총 좌표 수
+        leftRange = Calc(left, spawnGap);                               //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
+        rightRange = Calc(right, spawnGap);                             //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
+        arrayRange = rightRange - leftRange + 1;                        //떨어질 수 있는 총 좌표 수
 
         canSpawnPoint = new bool[arrayRange];
 
         for(int i = 0; i < arrayRange; i++)
         {
-            canSpawnPoint[i] = true;                                //모든 좌표에 떨어질 수 있게 초기화
+            canSpawnPoint[i] = true;            //모든 좌표에 떨어질 수 있게 초기화
         }
 
-        CheckSeat();                                                //좌석 밑으로는 생성되지 않도록
+        CheckSeat();      //좌석 밑으로는 생성되지 않도록
     }
 
     private IEnumerator SpawnTimer()
