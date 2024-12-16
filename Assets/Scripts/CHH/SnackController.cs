@@ -59,22 +59,29 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        //spawnGap = mouse.lossyScale.x + snack5.transform.lossyScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
-        left = bus.GetChild(1).position.x - (bus.GetChild(1).lossyScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
-        right = bus.GetChild(1).position.x + (bus.GetChild(1).lossyScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
-
-        leftRange = Calc(left, spawnGap);                               //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
-        rightRange = Calc(right, spawnGap);                             //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
-        arrayRange = rightRange - leftRange + 1;                        //떨어질 수 있는 총 좌표 수
-
-        canSpawnPoint = new bool[arrayRange];
-
-        for(int i = 0; i < arrayRange; i++)
+        if(bus.GetChild(1) != null && bus.GetChild(1).name != "Square")
         {
-            canSpawnPoint[i] = true;            //모든 좌표에 떨어질 수 있게 초기화
-        }
+            //spawnGap = mouse.lossyScale.x + snack5.transform.lossyScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
+            left = bus.GetChild(1).position.x - (bus.GetChild(1).lossyScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+            right = bus.GetChild(1).position.x + (bus.GetChild(1).lossyScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
-        CheckSeat();      //좌석 밑으로는 생성되지 않도록
+            leftRange = Calc(left, spawnGap);                               //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
+            rightRange = Calc(right, spawnGap);                             //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
+            arrayRange = rightRange - leftRange + 1;                        //떨어질 수 있는 총 좌표 수
+
+            canSpawnPoint = new bool[arrayRange];
+
+            for(int i = 0; i < arrayRange; i++)
+            {
+                canSpawnPoint[i] = true;            //모든 좌표에 떨어질 수 있게 초기화
+            }
+
+            CheckSeat();      //좌석 밑으로는 생성되지 않도록
+        }
+        else
+        {
+            Debug.LogError("Bus의 2번째 자식이 NULL이거나 Square이 아닙니다.");
+        }
     }
 
     private IEnumerator SpawnTimer()
@@ -114,13 +121,19 @@ public class SnackController : MonoBehaviour
         seatRight = new float[seatCount];                       //좌석의 우측좌표
         int seatLeftIndex;                                      //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
         int seatRightIndex;
+
         for(int i = 0; i < seatCount; i++)
         {
             seatLeft[i] = seat[i].position.x - (seat[i].lossyScale.x / 2);
             seatRight[i] = seat[i].position.x + (seat[i].lossyScale.x / 2);
             seatLeftIndex = Convert.ToInt32(Math.Round(seatLeft[i] / spawnGap)) - leftRange;
             seatRightIndex = Convert.ToInt32(Math.Round(seatRight[i] / spawnGap)) - leftRange;
-            
+
+            if(seatRightIndex - seatLeftIndex < 0)
+            {
+                Debug.Log("시트가 잘못 설정되었습니다.");
+            }
+
             for(int j = seatLeftIndex; j <= seatRightIndex; j++)
             {
                 canSpawnPoint[j] = false;       //해당 좌석의 좌측과 우측 사이에 위치한 좌표는 못 떨어지도록
