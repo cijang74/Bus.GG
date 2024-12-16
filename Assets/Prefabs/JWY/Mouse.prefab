@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6896754367689083143}
   - component: {fileID: 6645614644883517379}
   - component: {fileID: 5818109490533895072}
-  - component: {fileID: 1480021349718259382}
+  - component: {fileID: 935287450294552552}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Player
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1480021349718259382
+--- !u!114 &935287450294552552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 430819662098482015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d80eeee0ea7c1d44397c27af7e2a143d, type: 3}
+  m_Script: {fileID: 11500000, guid: b04c1e9a9cb14c14e831b448ee753989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 10

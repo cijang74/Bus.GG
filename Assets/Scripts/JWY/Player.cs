@@ -78,14 +78,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Snack"))
         {
             Snack snack = other.gameObject.GetComponent<Snack>();
-            if (snack != null)
+            if (snack != null && nearbySnack == null) // 중복 저장 방지
             {
-                nearbySnack = snack; // 닿아있는 스낵 저장
+                nearbySnack = snack;
                 Debug.Log("스낵 근처: " + snack.name);
             }
         }
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     private void EatSnack()
     {
-        if(nearbySnack != null)
+        if(nearbySnack != null && storedSnack == null)
         {
             full += nearbySnack.GetWeight();    // 포만감 증가
             Debug.Log("스낵 먹음. 포만감: " + full);

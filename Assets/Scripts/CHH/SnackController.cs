@@ -69,7 +69,6 @@ public class SnackController : MonoBehaviour
     public void CatchedSnack(GameObject obj)
     {
         int i = Calc(obj.transform.position.x , spawnGap) - leftRange;
-        Debug.Log(3);
         canSpawnPoint[i] = true;
     }
 
