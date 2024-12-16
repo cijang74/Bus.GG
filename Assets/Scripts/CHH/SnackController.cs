@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SnackController : MonoBehaviour
 {
+    [SerializeField] Transform bus;
+
     [SerializeField] GameObject snack1;
     [SerializeField] GameObject snack2;
     [SerializeField] GameObject snack3;
@@ -18,7 +20,7 @@ public class SnackController : MonoBehaviour
 
     float left = -8.0f;
     float right = 8.0f;
-    float spawnGap = 1.0f;
+    float spawnGap;
     
     int leftRange;
     int rightRange;
@@ -29,7 +31,7 @@ public class SnackController : MonoBehaviour
 
     [SerializeField] Transform[] seat;
 
-    bool[] canSpawnPoint;       //-8 ~ 8이라면 index 0번은 -8을 가리킴. 위치 - left = index
+    bool[] canSpawnPoint;       //-8 ~ 8에 간격 1이라면 index 0번은 -8을 가리킴. 위치 - left = index
 
 
     void Start()
@@ -45,15 +47,19 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        leftRange = Calc(left, spawnGap);
-        rightRange = Calc(right, spawnGap);
-        arrayRange = rightRange - leftRange + 1;
+        spawnGap = snack5.transform.localScale.x;                   //최소 스폰 간격은 제일 큰 간식(snack5)의 크기(x)
+        //left = bus.position.x - (bus.localScale.x / 2) + spawnGap;  //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+        //right = bus.position.x + (bus.localScale.x / 2) - spawnGap; //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
+
+        leftRange = Calc(left, spawnGap);                           //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
+        rightRange = Calc(right, spawnGap);                         //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
+        arrayRange = rightRange - leftRange + 1;                    //떨어질 수 있는 총 좌표 수
 
         canSpawnPoint = new bool[arrayRange];
 
         for(int i = 0; i < arrayRange; i++)
         {
-            canSpawnPoint[i] = true;
+            canSpawnPoint[i] = true;                                //모든 좌표에 떨어질 수 있게 초기화
         }
     }
 
@@ -61,15 +67,15 @@ public class SnackController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.3f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
+            yield return new WaitForSeconds(0.3f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
             SpawnSnack();
         }
     }
 
     public void CatchedSnack(GameObject obj)
     {
-        int i = Calc(obj.transform.position.x , spawnGap) - leftRange;
-        canSpawnPoint[i] = true;
+        int i = Calc(obj.transform.position.x , spawnGap) - leftRange;             
+        canSpawnPoint[i] = true;                                    //간식을 집었으면 다시 그 위치에 떨어질 수 있음
     }
 
     private void SpawnSnack()

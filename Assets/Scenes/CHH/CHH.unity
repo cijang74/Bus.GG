@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efe3bcd19d374a4fa701a386f0908a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bus: {fileID: 0}
   snack1: {fileID: 4606561225841693013, guid: f829ee27e430e0e4d80a2c96523b0ae9, type: 3}
   snack2: {fileID: 626048388004927644, guid: 322daa038ae46964c856bc4cca92ef6d, type: 3}
   snack3: {fileID: 8284505779185992780, guid: 1b88aacee625d924395f859a96b74ed4, type: 3}
