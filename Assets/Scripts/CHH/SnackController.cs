@@ -38,10 +38,15 @@ public class SnackController : MonoBehaviour
         StartCoroutine(SpawnTimer());
     }
 
+    private int Calc(float a, float b)  //a를 b로 나눠서 나머지 버리고 int로 변환해주는 함수
+    {
+        return Convert.ToInt32(Math.Truncate(a / b));
+    }
+
     private void InitSpawnPointArray()
     {
-        leftRange = Convert.ToInt32(Math.Truncate(left / spawnGap));
-        rightRange = Convert.ToInt32(Math.Truncate(right / spawnGap));
+        leftRange = Calc(left, spawnGap);
+        rightRange = Calc(right, spawnGap);
         arrayRange = rightRange - leftRange + 1;
 
         canSpawnPoint = new bool[arrayRange];
@@ -59,6 +64,12 @@ public class SnackController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
             SpawnSnack();
         }
+    }
+
+    public void CatchedSnack(GameObject obj)
+    {
+        int i = Calc(obj.transform.position.x , spawnGap) - leftRange;
+        canSpawnPoint[i] = true;
     }
 
     private void SpawnSnack()
@@ -94,8 +105,8 @@ public class SnackController : MonoBehaviour
         {
             seatLeft = seat[i].position.x - (seat[i].localScale.x / 2);
             seatRight = seat[i].position.x + (seat[i].localScale.x / 2);
-            seatLeftIndex = Convert.ToInt32(Math.Truncate(seatLeft / spawnGap)) - leftRange;
-            seatRightIndex = Convert.ToInt32(Math.Truncate(seatRight / spawnGap)) - leftRange;
+            seatLeftIndex = Calc(seatLeft , spawnGap) - leftRange;
+            seatRightIndex = Calc(seatRight , spawnGap) - leftRange;
             
             for(int j = seatLeftIndex; j <= seatRightIndex; j++)
             {
