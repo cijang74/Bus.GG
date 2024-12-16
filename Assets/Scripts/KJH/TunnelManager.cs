@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TunnelManager : Singleton<TunnelManager>
 {
@@ -9,7 +10,9 @@ public class TunnelManager : Singleton<TunnelManager>
     private Coroutine printCoroutine;
     private BackGroundManage backGroundManage;
 
-    protected override void Awake() 
+    [SerializeField] private Image timerImage; // Canvas의 Image 객체 (타이머 색상 변경을 위한 변수)
+
+    protected override void Awake()
     {
         base.Awake();
         backGroundManage = FindAnyObjectByType<BackGroundManage>();
@@ -69,19 +72,31 @@ public class TunnelManager : Singleton<TunnelManager>
 
         while (remainingTime > 0)
         {
+            Debug.Log($"{remainingTime:F1}초 남음..");
+
+            if (remainingTime <= 4f && backGroundManage.isExitTunnel)
+            {
+                timerImage.color = Color.white; // Image 색상을 빨간색으로 변경
+            }
+
+            if (remainingTime <= 4f && backGroundManage.isEnterTunnel)
+            {
+                timerImage.color = Color.red; // 기본 색상으로 되돌림 (필요 시)
+            }
+
             yield return new WaitForSeconds(1f);
             remainingTime -= 1f;
         }
+
     }
 
     public void RevertEnvironment()
     {
-        if(isMakingTunnel)
+        if (isMakingTunnel)
         {
             backGroundManage.isEnterTunnel = true;
             backGroundManage.isExitTunnel = false;
         }
-
         else
         {
             backGroundManage.isEnterTunnel = false;
