@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     private float[] seatLeft;
     private float[] seatRight;
-    private bool isSafe = false;
+    public bool isSafe = false;
 
     void Start()
     {
