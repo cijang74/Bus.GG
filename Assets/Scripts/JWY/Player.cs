@@ -16,6 +16,7 @@ public class Player : Singleton<Player>
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
+    SpriteRenderer mySpriteRenderer;
     GameObject snackController;
     private float timeSineLastDecrease = 0f;
 
@@ -36,6 +37,7 @@ public class Player : Singleton<Player>
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
         snackController = GameObject.Find("SnackController");
         InitSafetyZone();
     }
@@ -43,6 +45,7 @@ public class Player : Singleton<Player>
     void Update()
     {
         Run();
+        FlipSprite();
         CheckIsInSafetyZone();
         DecreaseFullness();
         CheckDeadPlayer();
@@ -86,6 +89,16 @@ public class Player : Singleton<Player>
         }
 
         myRigidbody.velocity = playerVelocity;
+    }
+
+    void FlipSprite()
+    {
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+
+        if (playerHasHorizontalSpeed)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1f);
+        }
     }
 
     private void InitSafetyZone()
