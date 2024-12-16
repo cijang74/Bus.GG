@@ -25,7 +25,7 @@ public class SnackController : MonoBehaviour
 
     float left;
     float right;
-    float spawnGap = 0.3f;
+    float spawnGap = 0.2f;
     
     int leftRange;
     int rightRange;
@@ -35,7 +35,7 @@ public class SnackController : MonoBehaviour
     float[] seatRight;
 
     float minSpawnDelay = 1f;
-    float maxSpawnDelay = 5f;
+    float maxSpawnDelay = 4f;
 
 
     bool[] canSpawnPoint;       //-8 ~ 8에 간격 1이라면 index 0번은 -8을 가리킴. 위치 - left = index
@@ -59,7 +59,7 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        if(bus.GetChild(1) != null && bus.GetChild(1).name != "Square")
+        if(bus.GetChild(1) != null && bus.GetChild(1).gameObject.name == "Square")
         {
             //spawnGap = mouse.lossyScale.x + snack5.transform.lossyScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
             left = bus.GetChild(1).position.x - (bus.GetChild(1).lossyScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
@@ -88,7 +88,7 @@ public class SnackController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.1f);//주석해제UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
+            yield return new WaitForSeconds(0.1f);//주석해제UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 4초까지 랜덤으로 떨어짐
             SpawnSnack();
         }
     }
