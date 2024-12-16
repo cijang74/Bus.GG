@@ -88,7 +88,7 @@ public class SnackController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.1f);//주석해제UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 4초까지 랜덤으로 떨어짐
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 4초까지 랜덤으로 떨어짐
             SpawnSnack();
         }
     }

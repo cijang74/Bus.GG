@@ -242,41 +242,40 @@ public class Player : Singleton<Player>
 
     private void AnimationCheck()
     {
-        if(myRigidbody.velocity.x != 0 && !storedSnack)
+        if(myRigidbody.velocity.x != 0 && !storedSnack) // 저장 안하고 움직일떄
         {
+            animator.SetBool("isEatIdle", false);
             animator.SetBool("isEatRun", false);
             animator.SetBool("isRun", true);
         }
 
-        if(myRigidbody.velocity.x == 0 && !storedSnack)
+        if(myRigidbody.velocity.x == 0 && !storedSnack) // 저장 안하고 안움직일때 -> 모든 부울 끄기
         {
+            animator.SetBool("isEatIdle", false);
             animator.SetBool("isEatRun", false);
             animator.SetBool("isRun", false);
         }
 
-        if(!storedSnack)
-        {
-            animator.SetBool("isEatIdle", false);
-        }
-
-        if(myRigidbody.velocity.x != 0 && storedSnack)
+        if(myRigidbody.velocity.x != 0 && storedSnack) // 저장 하고 움직일 때
         {
             animator.SetBool("isEatIdle", false);
             animator.SetBool("isEatRun", true);
+            animator.SetBool("isRun", false);
         }
 
-        if(myRigidbody.velocity.x == 0 && storedSnack)
+        if(myRigidbody.velocity.x == 0 && storedSnack) // 저장 하고 안움직일때
         {
             animator.SetBool("isEatRun", false);
             animator.SetBool("isEatIdle", true);
+            animator.SetBool("isRun", false);
         }
 
-        if(eatingSnack)
+        if(eatingSnack) // 먹을 때
         {
             animator.SetBool("isEat", true);
         }
 
-        if(!eatingSnack)
+        if(!eatingSnack) // 안먹을 때
         {
             animator.SetBool("isEat", false);
         }

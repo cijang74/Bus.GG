@@ -74,7 +74,7 @@ public class Snack : MonoBehaviour
         transform.position = position; // 위치 변경
         this.gameObject.SetActive(true); // 오브젝트 활성화
         this.GetComponent<CircleCollider2D>().isTrigger = false; // 트리거 비활성화
-        rb.gravityScale = 1f; // 중력 활성화
+        rb.gravityScale = 0.5f; // 중력 활성화
     }
 
     // Update is called once per frame
