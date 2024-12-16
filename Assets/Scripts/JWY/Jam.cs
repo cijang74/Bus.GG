@@ -5,7 +5,6 @@ using UnityEngine;
 public class Jam : MonoBehaviour
 {
     [SerializeField] private float speedReductionFactor = 0.5f; // 이동 속도 감소 비율 (50% 감소)
-    private float originalSpeed; // 원래 속도 저장
     private Rigidbody2D rb; // Rigidbody 참조
     private bool isOnGround = false; // 땅에 닿았는지 확인용 플래그
     [SerializeField] private float lifetime = 10f; // 10초 뒤 사라지는 시간 설정
@@ -56,7 +55,6 @@ public class Jam : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                originalSpeed = player.runSpeed; // 원래 속도 저장
                 player.runSpeed *= speedReductionFactor; // 속도 감소
                 Debug.Log($"이동 속도 감소: {player.runSpeed}");
             }
@@ -73,7 +71,7 @@ public class Jam : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.runSpeed = originalSpeed; // 원래 속도로 복원
+                player.runSpeed /= speedReductionFactor; // 원래 속도로 복원
                 Debug.Log($"이동 속도 복원: {player.runSpeed}");
             }
         }

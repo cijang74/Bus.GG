@@ -81,7 +81,7 @@ public class SnackController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.1f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
+            yield return new WaitForSeconds(0.1f);//주석해제UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
             SpawnSnack();
         }
     }
@@ -130,17 +130,18 @@ public class SnackController : MonoBehaviour
 
     public void CatchedSnack(GameObject obj)
     {
-        int i = Calc(obj.transform.position.x , spawnGap);             
+        int i = Convert.ToInt32(Math.Round(obj.transform.position.x / spawnGap));             
         int count = 0;
         for(int j = 0; j < seat.Length; j++)
         {    
-            if((i + 1) * spawnGap < seatLeft[j] || seatRight[j] < (i - 1) * spawnGap)
+            if(i * spawnGap < seatLeft[j] || seatRight[j] < i * spawnGap)
             {   
                 count++;
             }
         }
         if(count == seat.Length)
         {
+            Debug.Log(123123123);
             canSpawnPoint[i - leftRange] = true;        //간식을 집었으면 다시 그 위치에 떨어질 수 있음
         }
     }
