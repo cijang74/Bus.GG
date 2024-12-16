@@ -7,6 +7,7 @@ using UnityEngine;
 public class SnackController : MonoBehaviour
 {
     [SerializeField] Transform bus;
+    [SerializeField] Transform mouse;
 
     [SerializeField] GameObject snack1;
     [SerializeField] GameObject snack2;
@@ -17,6 +18,7 @@ public class SnackController : MonoBehaviour
 
     int whatSnackNum;
     GameObject toSpawnSnack;
+    bool isJam = false;
 
     float left;
     float right;
@@ -47,7 +49,7 @@ public class SnackController : MonoBehaviour
 
     private void InitSpawnPointArray()
     {
-        spawnGap = snack5.transform.localScale.x;                   //최소 스폰 간격은 제일 큰 간식(snack5)의 크기(x)
+        spawnGap = mouse.localScale.x;                              //최소 스폰 간격은 쥐의 크기 (x좌표)
         left = bus.position.x - (bus.localScale.x / 2) + spawnGap;  //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
         right = bus.position.x + (bus.localScale.x / 2) - spawnGap; //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
@@ -123,7 +125,7 @@ public class SnackController : MonoBehaviour
 
     private void ChooseSpawnSnack()
     {
-        int whatSnackNum = UnityEngine.Random.Range(1,6);   //간식 1~5, 잼 중 랜덤
+        int whatSnackNum = UnityEngine.Random.Range(1, 7);   //간식 1~5, 잼 중 랜덤
         if(whatSnackNum == 1)
         {
             toSpawnSnack = snack1;
@@ -147,6 +149,7 @@ public class SnackController : MonoBehaviour
         else
         {
             toSpawnSnack = jam;
+            isJam = true;
         }
     }
 
