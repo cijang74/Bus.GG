@@ -37,7 +37,7 @@ public class SnackController : MonoBehaviour
         int arrayRange = Convert.ToInt32(right - left + 1);
         for(int i = 0; i < arrayRange; i++)
         {
-            //canSpawnPoint[i] = true;
+            canSpawnPoint[i] = true;
         }
     }
     
