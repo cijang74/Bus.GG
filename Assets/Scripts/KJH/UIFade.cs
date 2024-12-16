@@ -11,6 +11,19 @@ public class UIFade : Singleton<UIFade>
 
     private IEnumerator fadeRoutine;
 
+    private void Update() 
+    {
+        if(fadeScreen.color.a > 0 && Player.Instance.isLight)
+        {
+            Player.Instance.isLight = false;
+        }
+
+        if(fadeScreen.color.a == 0 && !Player.Instance.isLight)
+        {
+            Player.Instance.isLight = true;
+        }
+    }
+
     public void FadeToBlack()
     {
         if(fadeRoutine != null) // 현재 실행중인 코루틴이 있다면

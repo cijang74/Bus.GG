@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     [SerializeField] public float runSpeed = 10f;
     [SerializeField] public float full = 100f;     //포만감, 계속해서 감소
@@ -25,7 +26,17 @@ public class Player : MonoBehaviour
 
     private float[] seatLeft;
     private float[] seatRight;
+<<<<<<< Updated upstream
     public bool isSafe = true;
+=======
+    public bool isLight = true;
+    public bool isSafe = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+>>>>>>> Stashed changes
 
     void Start()
     {
@@ -40,6 +51,7 @@ public class Player : MonoBehaviour
         Run();
         CheckIsInSafetyZone();
         DecreaseFullness();
+        CheckDeadPlayer();
 
         if (nearbySnack != null)
         {
@@ -210,6 +222,15 @@ public class Player : MonoBehaviour
             
             runSpeed = initialRunSpeed;
             storedSnack = null;
+        }
+    }
+
+    private void CheckDeadPlayer()
+    {
+        if(isLight && !isSafe)
+        {
+            Debug.Log("사망!");
+            SceneManager.LoadScene("Ending");
         }
     }
 }
