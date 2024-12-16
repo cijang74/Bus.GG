@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float decreaseInterval = 1f;   //포만감 감소 간격(초)
 
     bool eatingSnack = false;
+    float initialRunSpeed;
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        initialRunSpeed = runSpeed;
     }
 
     void Update()
@@ -121,6 +123,7 @@ public class Player : MonoBehaviour
             storedSnack = nearbySnack;
             storedSnack.Consume();
             Debug.Log("스낵 저장: " + storedSnack.name);
+            runSpeed -= (initialRunSpeed / 10 * storedSnack.GetWeight());
         }
         else if (storedSnack != null)
         {
@@ -159,6 +162,8 @@ public class Player : MonoBehaviour
             // 플레이어 위치 기준으로 스낵을 뱉음
             Vector3 spitPosition = transform.position + new Vector3(storedSnack.transform.localScale.x, storedSnack.transform.localScale.y, 0f); // 플레이어 오른쪽에 스낵을 뱉음
             storedSnack.SpitOut(spitPosition);
+            
+            runSpeed = initialRunSpeed;
             storedSnack = null;
         }
         else
