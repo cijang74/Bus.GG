@@ -157,7 +157,7 @@ public class Player : MonoBehaviour
         if (storedSnack != null)
         {
             // 플레이어 위치 기준으로 스낵을 뱉음
-            Vector3 spitPosition = transform.position + new Vector3(1f, 0f, 0f); // 플레이어 오른쪽에 스낵을 뱉음
+            Vector3 spitPosition = transform.position + new Vector3(storedSnack.transform.localScale.x, storedSnack.transform.localScale.y, 0f); // 플레이어 오른쪽에 스낵을 뱉음
             storedSnack.SpitOut(spitPosition);
             storedSnack = null;
         }

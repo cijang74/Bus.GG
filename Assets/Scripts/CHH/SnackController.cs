@@ -18,8 +18,8 @@ public class SnackController : MonoBehaviour
     int whatSnackNum;
     GameObject toSpawnSnack;
 
-    float left = -8.0f;
-    float right = 8.0f;
+    float left;
+    float right;
     float spawnGap;
     
     int leftRange;
@@ -48,8 +48,8 @@ public class SnackController : MonoBehaviour
     private void InitSpawnPointArray()
     {
         spawnGap = snack5.transform.localScale.x;                   //최소 스폰 간격은 제일 큰 간식(snack5)의 크기(x)
-        //left = bus.position.x - (bus.localScale.x / 2) + spawnGap;  //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
-        //right = bus.position.x + (bus.localScale.x / 2) - spawnGap; //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
+        left = bus.position.x - (bus.localScale.x / 2) + spawnGap;  //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+        right = bus.position.x + (bus.localScale.x / 2) - spawnGap; //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
         leftRange = Calc(left, spawnGap);                           //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
         rightRange = Calc(right, spawnGap);                         //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
@@ -95,7 +95,7 @@ public class SnackController : MonoBehaviour
         }while(!canSpawnPoint[arrayX - leftRange]);                             //해당 좌표에 간식이 없으면
         canSpawnPoint[arrayX - leftRange] = false;                              //해당 좌표에 간식 있다고 표시
 
-        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);                 
+        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, bus.position.y);                 
 
         Instantiate(toSpawnSnack, spawnPoint, Quaternion.identity);
     }
