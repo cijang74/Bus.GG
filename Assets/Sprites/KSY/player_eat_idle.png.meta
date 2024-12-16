@@ -123,69 +123,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_eat_idle1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 675
-        width: 341
-        height: 335
-      alignment: 9
-      pivot: {x: 0.8206757, y: 0.025208795}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c57444bc4a53fa4fbf7b73ae2f83fa5
-      internalID: -1208013826
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_eat_idle2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 336
-        width: 315
-        height: 339
-      alignment: 9
-      pivot: {x: 0.8011541, y: 0.011628278}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9d3f613db7823246a16afa3043048b3
-      internalID: -928001686
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_eat_idle0
-      rect:
-        serializedVersion: 2
-        x: 312
-        y: 340
-        width: 318
-        height: 335
-      alignment: 9
-      pivot: {x: 0.81955534, y: 0.021854138}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 104161da98be1524e9132e91a7c1ea87
-      internalID: -1826108200
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: player_eat_idle_3
       rect:
         serializedVersion: 2
@@ -193,8 +130,8 @@ TextureImporter:
         y: 0
         width: 317
         height: 336
-      alignment: 9
-      pivot: {x: 0.8145027, y: 0.016259184}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,6 +139,69 @@ TextureImporter:
       bones: []
       spriteID: 2367654f59f367f47b9409384bb3de5d
       internalID: 1949109472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_eat_idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 675
+        width: 341
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c053490d1e1feda4cb139304621da6e0
+      internalID: -487612537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_eat_idle_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 315
+        height: 339
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 718ef4f8f48fb6444bdf6300d7b9e085
+      internalID: -2026108451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_eat_idle_2
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 340
+        width: 318
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d57f80ea4f618942b4731c79be9bddf
+      internalID: -846144499
       vertices: []
       indices: 
       edges: []
@@ -217,9 +217,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      player_eat_idle0: -1826108200
-      player_eat_idle1: -1208013826
-      player_eat_idle2: -928001686
+      player_eat_idle_0: -487612537
+      player_eat_idle_1: -2026108451
+      player_eat_idle_2: -846144499
       player_eat_idle_3: 1949109472
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
