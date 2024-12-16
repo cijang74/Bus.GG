@@ -40,11 +40,10 @@ public class Snack : MonoBehaviour
         // 스낵이 입에 저장될 때
         Debug.Log("Snack stored!");
         onGround = false;
-        SnackController snackController = GetComponent<SnackController>();
+        GameObject snackController = GameObject.Find("SnackController");
         if (snackController != null)
         {
-            Debug.Log(3);
-            snackController.CatchedSnack(this.gameObject);
+            snackController.GetComponent<SnackController>().CatchedSnack(this.gameObject);
         }
         this.GetComponent<CircleCollider2D>().isTrigger = false; // 트리거 비활성화
         this.gameObject.SetActive(false); // 오브젝트 비활성화
