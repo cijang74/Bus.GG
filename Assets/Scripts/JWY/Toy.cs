@@ -52,7 +52,7 @@ public class Toy : MonoBehaviour
             // 서서히 사라지기 시작
             StartCoroutine(FadeOutAndDestroy());
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (collision.gameObject.CompareTag("Player") && spriteRenderer.color.a == 1f)
         {
             // 플레이어와 충돌 시
             Debug.Log("사망!");
