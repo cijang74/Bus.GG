@@ -752,6 +752,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1595423609}
     - target: {fileID: 2562008512149284389, guid: 6fbbc094aba68cb499ccec0a08f44cf2, type: 3}
+      propertyPath: shadowPrefab
+      value: 
+      objectReference: {fileID: 8116944242076259158, guid: 49e75d8498bea43449272e6ac5d33838, type: 3}
+    - target: {fileID: 2562008512149284389, guid: 6fbbc094aba68cb499ccec0a08f44cf2, type: 3}
       propertyPath: seat.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1489,7 +1493,7 @@ Transform:
   m_GameObject: {fileID: 1808680644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.03, y: -16.47, z: 0}
+  m_LocalPosition: {x: 2.03, y: -16.42, z: 0}
   m_LocalScale: {x: 1.6502948, y: 0.07365291, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
