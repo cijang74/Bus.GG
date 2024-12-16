@@ -12,7 +12,6 @@ public class Player : Singleton<Player>
     [SerializeField] private float decreaseInterval = 1f;   //포만감 감소 간격(초)
 
     bool eatingSnack = false;
-    float initialRunSpeed;
     float jamDownSpeed = 0.2f;
 
     Vector2 moveInput;
@@ -38,7 +37,6 @@ public class Player : Singleton<Player>
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         snackController = GameObject.Find("SnackController");
-        initialRunSpeed = runSpeed;
         InitSafetyZone();
     }
 
@@ -138,11 +136,6 @@ public class Player : Singleton<Player>
             {
                 nearbySnack = snack;
                 Debug.Log("스낵 근처: " + snack.name);
-
-                if(nearbySnack.GetWeight() == 6)        //잼이라면
-                {
-                    runSpeed -= jamDownSpeed;
-                }
             }
         }
     }
@@ -151,11 +144,6 @@ public class Player : Singleton<Player>
     {
         if (other.gameObject.CompareTag("Snack"))
         {
-            if(nearbySnack.GetWeight() == 6)        //잼이라면
-            {
-                runSpeed += jamDownSpeed;
-            }
-
             nearbySnack = null; // 닿아있는 스낵 초기화
             eatingSnack = false;
             Debug.Log("스낵 멀어짐");
@@ -166,13 +154,10 @@ public class Player : Singleton<Player>
     {
         if (storedSnack == null && nearbySnack != null)
         {
-            if(nearbySnack.GetWeight() != 6)
-            {
-                storedSnack = nearbySnack;
-                storedSnack.Consume();
-                Debug.Log("스낵 저장: " + storedSnack.name);
-                runSpeed -= (initialRunSpeed / 10 * storedSnack.GetWeight());
-            }
+            storedSnack = nearbySnack;
+            storedSnack.Consume();
+            Debug.Log("스낵 저장: " + storedSnack.name);
+            runSpeed *= ((10 - storedSnack.GetWeight()) / 10.0f);
         }
         else if (storedSnack != null)
         {
@@ -194,16 +179,18 @@ public class Player : Singleton<Player>
 
     private IEnumerator EatSnackCour()
     {   
-        yield return new WaitForSeconds(nearbySnack.GetTimeToEat());
-        full = Mathf.Min(full + nearbySnack.GetWeight(), 100f);    // 포만감 증가, 최대값 100 유지
-        Debug.Log("스낵 먹음. 포만감: " + full);
+        Snack Snacked = nearbySnack;
+        yield return new WaitForSeconds(Snacked.GetTimeToEat());
 
         if (snackController != null)
         {
-            snackController.GetComponent<SnackController>().CatchedSnack(nearbySnack.gameObject);
+            snackController.GetComponent<SnackController>().CatchedSnack(Snacked.gameObject);
         }
 
-        Destroy(nearbySnack.gameObject);
+        full = Mathf.Min(full + Snacked.GetWeight(), 100f);    // 포만감 증가, 최대값 100 유지
+        Debug.Log("스낵 먹음. 포만감: " + full);
+
+        Destroy(Snacked.gameObject);
         nearbySnack = null;
         eatingSnack = false;
     }
@@ -216,7 +203,7 @@ public class Player : Singleton<Player>
             Vector3 spitPosition = transform.position + new Vector3(storedSnack.transform.localScale.x, storedSnack.transform.localScale.y, 0f); // 플레이어 오른쪽에 스낵을 뱉음
             storedSnack.SpitOut(spitPosition);
             
-            runSpeed = initialRunSpeed;
+            runSpeed /= ((10 - storedSnack.GetWeight()) / 10.0f);
             storedSnack = null;
         }
     }
