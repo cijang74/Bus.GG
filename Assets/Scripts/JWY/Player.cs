@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField] public float runSpeed = 10f;
-    [SerializeField] public float full = 100f;     //Æ÷¸¸°¨, °è¼ÓÇØ¼­ °¨¼Ò
-    [SerializeField] private float decreaseInterval = 1f;   //Æ÷¸¸°¨ °¨¼Ò °£°İ(ÃÊ)
+    [SerializeField] public float full = 100f;     //í¬ë§Œê°, ê³„ì†í•´ì„œ ê°ì†Œ
+    [SerializeField] private float decreaseInterval = 1f;   //í¬ë§Œê° ê°ì†Œ ê°„ê²©(ì´ˆ)
 
 
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     private float timeSineLastDecrease = 0f;
-    private Snack nearbySnack = null;   //´ê¾ÆÀÖ´Â ½º³¼
-    private Snack storedSnack = null;   //ÀúÀåµÈ ½º³¼
+    private Snack nearbySnack = null;   //ë‹¿ì•„ìˆëŠ” ìŠ¤ë‚µ
+    private Snack storedSnack = null;   //ì €ì¥ëœ ìŠ¤ë‚µ
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (storedSnack != null && Keyboard.current.spaceKey.wasPressedThisFrame) // ½ºÆäÀÌ½º¹Ù·Î ¹ñ±â
+        if (storedSnack != null && Keyboard.current.spaceKey.wasPressedThisFrame) // ìŠ¤í˜ì´ìŠ¤ë°”ë¡œ ë±‰ê¸°
         {
             SpitOutSnack();
         }
@@ -60,18 +60,18 @@ public class Player : MonoBehaviour
 
     private void DecreaseFullness()
     {
-        timeSineLastDecrease += Time.deltaTime;     //ÇÁ·¹ÀÓ ½Ã°£ ´©Àû
+        timeSineLastDecrease += Time.deltaTime;     //í”„ë ˆì„ ì‹œê°„ ëˆ„ì 
 
         if (timeSineLastDecrease >= decreaseInterval)
         {
             if (full > 0)
             {
                 full -= 1;
-                Debug.Log("Æ÷¸¸°¨ °¨¼Ò: " + full);
+                Debug.Log("í¬ë§Œê° ê°ì†Œ: " + full);
             }
             else
             {
-                Debug.Log("Æ÷¸¸°¨ÀÌ 0ÀÔ´Ï´Ù.");
+                Debug.Log("í¬ë§Œê°ì´ 0ì…ë‹ˆë‹¤.");
             }
 
             timeSineLastDecrease = 0f;
@@ -85,8 +85,8 @@ public class Player : MonoBehaviour
             Snack snack = other.gameObject.GetComponent<Snack>();
             if (snack != null)
             {
-                nearbySnack = snack; // ´ê¾ÆÀÖ´Â ½º³¼ ÀúÀå
-                Debug.Log("½º³¼ ±ÙÃ³: " + snack.name);
+                nearbySnack = snack; // ë‹¿ì•„ìˆëŠ” ìŠ¤ë‚µ ì €ì¥
+                Debug.Log("ìŠ¤ë‚µ ê·¼ì²˜: " + snack.name);
             }
         }
     }
@@ -95,8 +95,8 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Snack"))
         {
-            nearbySnack = null; // ´ê¾ÆÀÖ´Â ½º³¼ ÃÊ±âÈ­
-            Debug.Log("½º³¼ ¸Ö¾îÁü");
+            nearbySnack = null; // ë‹¿ì•„ìˆëŠ” ìŠ¤ë‚µ ì´ˆê¸°í™”
+            Debug.Log("ìŠ¤ë‚µ ë©€ì–´ì§");
         }
     }
 
@@ -105,11 +105,11 @@ public class Player : MonoBehaviour
         if (storedSnack == null && nearbySnack != null)
         {
             storedSnack = nearbySnack;
-            Debug.Log("½º³¼ ÀúÀå: " + storedSnack.name);
+            Debug.Log("ìŠ¤ë‚µ ì €ì¥: " + storedSnack.name);
         }
         else if (storedSnack != null)
         {
-            Debug.Log("ÀÌ¹Ì ÀúÀåµÈ ½º³¼ÀÌ ÀÖ½À´Ï´Ù!");
+            Debug.Log("ì´ë¯¸ ì €ì¥ëœ ìŠ¤ë‚µì´ ìˆìŠµë‹ˆë‹¤!");
         }
     }
 
@@ -117,13 +117,13 @@ public class Player : MonoBehaviour
     {
         if (storedSnack != null)
         {
-            full += storedSnack.GetWeight(); // Æ÷¸¸°¨ Áõ°¡
-            Debug.Log("½º³¼ ¸ÔÀ½. Æ÷¸¸°¨: " + full);
-            storedSnack = null; // ÀúÀåµÈ ½º³¼ ºñ¿ò
+            full += storedSnack.GetWeight(); // í¬ë§Œê° ì¦ê°€
+            Debug.Log("ìŠ¤ë‚µ ë¨¹ìŒ. í¬ë§Œê°: " + full);
+            storedSnack = null; // ì €ì¥ëœ ìŠ¤ë‚µ ë¹„ì›€
         }
         else
         {
-            Debug.Log("ÀúÀåµÈ ½º³¼ÀÌ ¾ø½À´Ï´Ù!");
+            Debug.Log("ì €ì¥ëœ ìŠ¤ë‚µì´ ì—†ìŠµë‹ˆë‹¤!");
         }
     }
 
@@ -131,14 +131,14 @@ public class Player : MonoBehaviour
     {
         if (storedSnack != null)
         {
-            // ÇÃ·¹ÀÌ¾î À§Ä¡ ±âÁØÀ¸·Î ½º³¼À» ¹ñÀ½
-            Vector3 spitPosition = transform.position + new Vector3(1f, 0f, 0f); // ÇÃ·¹ÀÌ¾î ¿À¸¥ÂÊ¿¡ ½º³¼À» ¹ñÀ½
+            // í”Œë ˆì´ì–´ ìœ„ì¹˜ ê¸°ì¤€ìœ¼ë¡œ ìŠ¤ë‚µì„ ë±‰ìŒ
+            Vector3 spitPosition = transform.position + new Vector3(1f, 0f, 0f); // í”Œë ˆì´ì–´ ì˜¤ë¥¸ìª½ì— ìŠ¤ë‚µì„ ë±‰ìŒ
             storedSnack.SpitOut(spitPosition);
             storedSnack = null;
         }
         else
         {
-            Debug.Log("ÀúÀåµÈ ½º³¼ÀÌ ¾ø½À´Ï´Ù!");
+            Debug.Log("ì €ì¥ëœ ìŠ¤ë‚µì´ ì—†ìŠµë‹ˆë‹¤!");
         }
     }
 

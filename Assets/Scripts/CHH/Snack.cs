@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,13 +22,13 @@ public class Snack : MonoBehaviour
 
     public void Consume()
     {
-        // ½º³¼ÀÌ ÀÔ¿¡ ÀúÀåµÉ ¶§ ºñÈ°¼ºÈ­
+        // ìŠ¤ë‚µì´ ì…ì— ì €ì¥ë  ë•Œ ë¹„í™œì„±í™”
         Debug.Log("Snack consumed and stored!");
         gameObject.SetActive(false);
     }
     public void SpitOut(Vector3 position)
     {
-        // ½º³¼À» ¹ñÀ» ¶§ ´Ù½Ã È°¼ºÈ­ÇÏ°í À§Ä¡ º¯°æ
+        // ìŠ¤ë‚µì„ ë±‰ì„ ë•Œ ë‹¤ì‹œ í™œì„±í™”í•˜ê³  ìœ„ì¹˜ ë³€ê²½
         Debug.Log("Snack spit out!");
         gameObject.SetActive(true);
         transform.position = position;
