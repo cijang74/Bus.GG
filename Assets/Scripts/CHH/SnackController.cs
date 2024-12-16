@@ -11,6 +11,7 @@ public class SnackController : MonoBehaviour
     [SerializeField] GameObject snack3;
     [SerializeField] GameObject snack4;
     [SerializeField] GameObject snack5;
+    [SerializeField] GameObject jam;
 
     int whatSnackNum;
     GameObject toSpawnSnack;
@@ -77,7 +78,6 @@ public class SnackController : MonoBehaviour
 
         Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);
 
-        Debug.Log(arrayX);
         Instantiate(toSpawnSnack, spawnPoint, Quaternion.identity);
     }
 
@@ -100,9 +100,13 @@ public class SnackController : MonoBehaviour
         {
             toSpawnSnack = snack4;
         }
-        else
+        else if(whatSnackNum == 5)
         {
             toSpawnSnack = snack5;
+        }
+        else
+        {
+            toSpawnSnack = jam;
         }
     }
 
