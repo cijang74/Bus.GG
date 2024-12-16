@@ -15,6 +15,10 @@ public class Snack : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        //if(other.gameObject.CompareTag("Player"))
+        //{
+        //    Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.collider);
+        //}
         if (other.gameObject.CompareTag("Ground"))
         {
             // 스낵이 이미 땅에 닿았을 경우 추가 동작 방지
