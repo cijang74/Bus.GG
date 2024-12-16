@@ -1,45 +1,48 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Jam : MonoBehaviour
 {
-    [SerializeField] private float speedReductionFactor = 0.5f; // ÀÌµ¿ ¼Óµµ °¨¼Ò ºñÀ² (50% °¨¼Ò)
-    private float originalSpeed; // ¿ø·¡ ¼Óµµ ÀúÀå
-    private Rigidbody2D rb; // Rigidbody ÂüÁ¶
-    private bool isOnGround = false; // ¶¥¿¡ ´ê¾Ò´ÂÁö È®ÀÎ¿ë ÇÃ·¡±×
+    [SerializeField] private float speedReductionFactor = 0.5f; // ì´ë™ ì†ë„ ê°ì†Œ ë¹„ìœ¨ (50% ê°ì†Œ)
+    private float originalSpeed; // ì›ë˜ ì†ë„ ì €ì¥
+    private Rigidbody2D rb; // Rigidbody ì°¸ì¡°
+    private bool isOnGround = false; // ë•…ì— ë‹¿ì•˜ëŠ”ì§€ í™•ì¸ìš© í”Œë˜ê·¸
+    [SerializeField] private float lifetime = 10f; // 10ì´ˆ ë’¤ ì‚¬ë¼ì§€ëŠ” ì‹œê°„ ì„¤ì •
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        Destroy(gameObject, lifetime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") && !isOnGround)
         {
-            Debug.Log("JamÀÌ ¶¥¿¡ ´ê¾Ò½À´Ï´Ù!");
+            Debug.Log("Jamì´ ë•…ì— ë‹¿ì•˜ìŠµë‹ˆë‹¤!");
 
-            // Rigidbody ¼Óµµ ÃÊ±âÈ­ ¹× Æ®¸®°Å ¼³Á¤
+            // Rigidbody ì†ë„ ì´ˆê¸°í™” ë° íŠ¸ë¦¬ê±° ì„¤ì •
             if (rb != null)
             {
-                rb.velocity = Vector2.zero; // ¼Óµµ ¸ØÃã
-                rb.isKinematic = true; // ¹°¸®Àû »óÈ£ÀÛ¿ë ¸ØÃã
+                rb.velocity = Vector2.zero; // ì†ë„ ë©ˆì¶¤
+                rb.isKinematic = true; // ë¬¼ë¦¬ì  ìƒí˜¸ì‘ìš© ë©ˆì¶¤
             }
 
-            // ÀÚ½Ä ¿ÀºêÁ§Æ®ÀÇ CircleCollider2D¸¦ Ã£¾Æ Æ®¸®°Å·Î º¯°æ
+            // ìì‹ ì˜¤ë¸Œì íŠ¸ì˜ CircleCollider2Dë¥¼ ì°¾ì•„ íŠ¸ë¦¬ê±°ë¡œ ë³€ê²½
             CircleCollider2D childCollider = GetComponentInChildren<CircleCollider2D>();
             if (childCollider != null)
             {
-                childCollider.isTrigger = true; // Æ®¸®°Å·Î º¯°æ
-                Debug.Log("ÀÚ½Ä Äİ¶óÀÌ´õ°¡ Æ®¸®°Å·Î º¯°æµÇ¾ú½À´Ï´Ù.");
+                childCollider.isTrigger = true; // íŠ¸ë¦¬ê±°ë¡œ ë³€ê²½
+                Debug.Log("ìì‹ ì½œë¼ì´ë”ê°€ íŠ¸ë¦¬ê±°ë¡œ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.");
             }
             else
             {
-                Debug.LogError("ÀÚ½Ä CircleCollider2D¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogError("ìì‹ CircleCollider2Dë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             }
 
-            isOnGround = true; // ÀÌ¹Ì Ã³¸®µÇ¾úÀ½À» ÇÃ·¡±×·Î ¼³Á¤
+            isOnGround = true; // ì´ë¯¸ ì²˜ë¦¬ë˜ì—ˆìŒì„ í”Œë˜ê·¸ë¡œ ì„¤ì •
         }
     }
 
@@ -47,15 +50,15 @@ public class Jam : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î°¡ Jam¿¡ µé¾î¿Ô½À´Ï´Ù!");
+            Debug.Log("í”Œë ˆì´ì–´ê°€ Jamì— ë“¤ì–´ì™”ìŠµë‹ˆë‹¤!");
 
-            // PlayerÀÇ ÀÌµ¿ ¼Óµµ Á¶Àı
+            // Playerì˜ ì´ë™ ì†ë„ ì¡°ì ˆ
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                originalSpeed = player.runSpeed; // ¿ø·¡ ¼Óµµ ÀúÀå
-                player.runSpeed *= speedReductionFactor; // ¼Óµµ °¨¼Ò
-                Debug.Log($"ÀÌµ¿ ¼Óµµ °¨¼Ò: {player.runSpeed}");
+                originalSpeed = player.runSpeed; // ì›ë˜ ì†ë„ ì €ì¥
+                player.runSpeed *= speedReductionFactor; // ì†ë„ ê°ì†Œ
+                Debug.Log($"ì´ë™ ì†ë„ ê°ì†Œ: {player.runSpeed}");
             }
         }
     }
@@ -64,14 +67,14 @@ public class Jam : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("ÇÃ·¹ÀÌ¾î°¡ Jam¿¡¼­ ¹ş¾î³µ½À´Ï´Ù!");
+            Debug.Log("í”Œë ˆì´ì–´ê°€ Jamì—ì„œ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤!");
 
-            // PlayerÀÇ ÀÌµ¿ ¼Óµµ º¹¿ø
+            // Playerì˜ ì´ë™ ì†ë„ ë³µì›
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                player.runSpeed = originalSpeed; // ¿ø·¡ ¼Óµµ·Î º¹¿ø
-                Debug.Log($"ÀÌµ¿ ¼Óµµ º¹¿ø: {player.runSpeed}");
+                player.runSpeed = originalSpeed; // ì›ë˜ ì†ë„ë¡œ ë³µì›
+                Debug.Log($"ì´ë™ ì†ë„ ë³µì›: {player.runSpeed}");
             }
         }
     }
