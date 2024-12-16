@@ -22,7 +22,7 @@ public class SnackController : MonoBehaviour
 
     float timer = 0f;
 
-    bool[] canSpawnPoint;       //-8 ~ 8이라면 index 0번은 -8을 가리킴. 위치 - left = index
+    //bool canSpawnPoint[right - left + 1];       //-8 ~ 8이라면 index 0번은 -8을 가리킴. 위치 - left = index
 
 
     void Start()
@@ -37,7 +37,7 @@ public class SnackController : MonoBehaviour
         int arrayRange = Convert.ToInt32(right - left + 1);
         for(int i = 0; i < arrayRange; i++)
         {
-            canSpawnPoint[i] = true;
+            //canSpawnPoint[i] = true;
         }
     }
     
