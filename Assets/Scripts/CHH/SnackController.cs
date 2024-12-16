@@ -16,7 +16,7 @@ public class SnackController : MonoBehaviour
     [SerializeField] GameObject snack3;
     [SerializeField] GameObject snack4;
     [SerializeField] GameObject snack5;
-    [SerializeField] GameObject jam;
+    //[SerializeField] GameObject jam;
 
     [SerializeField] GameObject shadowPrefab;
 
@@ -162,7 +162,7 @@ public class SnackController : MonoBehaviour
 
     private void ChooseSpawnSnack()
     {
-        int whatSnackNum = UnityEngine.Random.Range(1, 7);   //간식 1~5, 잼 중 랜덤
+        int whatSnackNum = UnityEngine.Random.Range(1, 6);   //간식 1~5, 잼 중 랜덤
         if(whatSnackNum == 1)
         {
             toSpawnSnack = snack1;
@@ -183,10 +183,12 @@ public class SnackController : MonoBehaviour
         {
             toSpawnSnack = snack5;
         }
+        /*
         else
         {
             toSpawnSnack = jam;
         }
+        */
     }
 
     public float[] GetSeatLeft()

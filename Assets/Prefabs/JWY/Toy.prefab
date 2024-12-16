@@ -172,3 +172,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 2
+  jamPrefab: {fileID: 3686922298392650859, guid: 898bf4ac0e1bd0040b9ca3d312fb264f, type: 3}

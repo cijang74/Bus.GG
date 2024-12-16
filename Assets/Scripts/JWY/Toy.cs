@@ -11,6 +11,8 @@ public class Toy : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private float fadeDuration = 2f; // 사라지는 데 걸리는 시간
+    [SerializeField] private GameObject jamPrefab;
+
 
     void Start()
     {
@@ -74,6 +76,16 @@ public class Toy : MonoBehaviour
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
 
             yield return null;
+        }
+
+        if (jamPrefab != null)
+        {
+            Instantiate(jamPrefab, transform.position, Quaternion.identity);
+            Debug.Log("jam 프리팹이 생성되었습니다.");
+        }
+        else
+        {
+            Debug.LogError("jamPrefab이 할당되지 않았습니다!");
         }
 
         // 오브젝트 삭제
