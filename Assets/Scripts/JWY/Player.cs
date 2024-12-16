@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
     private IEnumerator EatSnackCour()
     {   
         yield return new WaitForSeconds(nearbySnack.GetTimeToEat());
-        full += nearbySnack.GetWeight();    // 포만감 증가
+        full = Mathf.Min(full + nearbySnack.GetWeight(), 100f);    // 포만감 증가, 최대값 100 유지
         Debug.Log("스낵 먹음. 포만감: " + full);
 
         GameObject snackController = GameObject.Find("SnackController");
