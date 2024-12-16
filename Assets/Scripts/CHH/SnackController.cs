@@ -17,38 +17,37 @@ public class SnackController : MonoBehaviour
 
     float left = -8.0f;
     float right = 8.0f;
+    float spawnGap = 1.0f;
+    
+    int leftRange;
+    int rightRange;
+    int arrayRange;
+
     float minSpawnDelay = 1f;
     float maxSpawnDelay = 5f;
 
-    float timer = 0f;
 
-    //bool canSpawnPoint[right - left + 1];       //-8 ~ 8이라면 index 0번은 -8을 가리킴. 위치 - left = index
+    bool[] canSpawnPoint;       //-8 ~ 8이라면 index 0번은 -8을 가리킴. 위치 - left = index
 
 
     void Start()
     {
         InitSpawnPointArray();
         StartCoroutine(SpawnTimer());
-        StartCoroutine(Timer());
     }
 
     private void InitSpawnPointArray()
     {
-        int arrayRange = Convert.ToInt32(right - left + 1);
+        leftRange = Convert.ToInt32(Math.Truncate(left / spawnGap));
+        rightRange = Convert.ToInt32(Math.Truncate(right / spawnGap));
+        arrayRange = rightRange - leftRange + 1;
+
+        canSpawnPoint = new bool[arrayRange];
+
         for(int i = 0; i < arrayRange; i++)
         {
-            //canSpawnPoint[i] = true;
+            canSpawnPoint[i] = true;
         }
-    }
-    
-    private IEnumerator Timer()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            timer += 0.1f;
-            //Debug.Log(Math.Round(timer, 1));
-        }        
     }
 
     private IEnumerator SpawnTimer()
@@ -56,7 +55,6 @@ public class SnackController : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
-            timer = 0f;
             SpawnSnack();
         }
     }
@@ -64,8 +62,22 @@ public class SnackController : MonoBehaviour
     private void SpawnSnack()
     {
         ChooseSpawnSnack();
-        Vector2 spawnPoint = new Vector2(UnityEngine.Random.Range(left, right), 0);
 
+        int arrayX;
+        int count = 0;
+        do
+        {
+            arrayX = UnityEngine.Random.Range(leftRange, rightRange + 1);
+            if(count++ > arrayRange)
+            {
+                return;
+            }
+        }while(!canSpawnPoint[arrayX - leftRange]);
+        canSpawnPoint[arrayX - leftRange] = false;
+
+        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, 0);
+
+        Debug.Log(arrayX);
         Instantiate(toSpawnSnack, spawnPoint, Quaternion.identity);
     }
 
