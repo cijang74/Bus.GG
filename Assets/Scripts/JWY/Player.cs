@@ -26,9 +26,6 @@ public class Player : Singleton<Player>
 
     private float[] seatLeft;
     private float[] seatRight;
-<<<<<<< Updated upstream
-    public bool isSafe = true;
-=======
     public bool isLight = true;
     public bool isSafe = true;
 
@@ -36,7 +33,6 @@ public class Player : Singleton<Player>
     {
         base.Awake();
     }
->>>>>>> Stashed changes
 
     void Start()
     {
