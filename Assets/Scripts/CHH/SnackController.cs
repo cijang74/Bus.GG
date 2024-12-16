@@ -60,8 +60,8 @@ public class SnackController : MonoBehaviour
     private void InitSpawnPointArray()
     {
         spawnGap = mouse.localScale.x + snack5.transform.localScale.x;  //최소 스폰 간격은 쥐의 크기 + 제일 큰 간식의 크기
-        left = bus.position.x - (bus.localScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
-        right = bus.position.x + (bus.localScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
+        left = bus.GetChild(1).position.x - (bus.GetChild(1).localScale.x / 2) + spawnGap;      //좌측 스폰 최대 길이 = 버스 좌측 좌표 + 최소 스폰 간격(우측으로 간격만큼)
+        right = bus.GetChild(1).position.x + (bus.GetChild(1).localScale.x / 2) - spawnGap;     //우측 스폰 최대 길이 = 버스 우측 좌표 - 최소 스폰 간격(좌측으로 간격만큼)
 
         leftRange = Calc(left, spawnGap);                               //0 기준 왼쪽에 떨어질 수 있는 좌표 수(음수)
         rightRange = Calc(right, spawnGap);                             //0 기준 우측에 떨어질 수 있는 좌표 수(양수)
@@ -102,7 +102,7 @@ public class SnackController : MonoBehaviour
         }while(!canSpawnPoint[arrayX - leftRange]);                             //해당 좌표에 간식이 없으면
         canSpawnPoint[arrayX - leftRange] = false;                              //해당 좌표에 간식 있다고 표시
 
-        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, bus.position.y);                 
+        Vector2 spawnPoint = new Vector2(arrayX * spawnGap, bus.GetChild(1).position.y);                 
 
         Instantiate(toSpawnSnack, spawnPoint, Quaternion.identity);
     }
@@ -157,7 +157,7 @@ public class SnackController : MonoBehaviour
                 float shadowScaleY = seat[i].position.y - busGroundY;
                 
                 shadowPrefab.transform.position = new Vector2(seat[i].position.x, shadowPosY);
-                shadowPrefab.transform.localScale = new Vector2(seat[i].localScale.x, shadowScaleY);
+                shadowPrefab.transform.localScale = new Vector2(seat[i].localScale.x / 3.5f, shadowScaleY);
 
                 Instantiate(shadowPrefab);
             }

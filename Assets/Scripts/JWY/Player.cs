@@ -195,7 +195,7 @@ public class Player : Singleton<Player>
     private IEnumerator EatSnackCour()
     {   
         Snack Snacked = nearbySnack;
-        
+
         GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEatSound();
         yield return new WaitForSeconds(Snacked.GetTimeToEat());
 
@@ -243,11 +243,13 @@ public class Player : Singleton<Player>
     {
         if(myRigidbody.velocity.x != 0 && !storedSnack)
         {
+            animator.SetBool("isEatRun", false);
             animator.SetBool("isRun", true);
         }
 
         if(myRigidbody.velocity.x == 0 && !storedSnack)
         {
+            animator.SetBool("isEatRun", false);
             animator.SetBool("isRun", false);
         }
 

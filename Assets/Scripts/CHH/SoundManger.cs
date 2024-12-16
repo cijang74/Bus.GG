@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
         if (eat != null)
         {
             audioSource3.clip = eat;
-            audioSource3.time = 0.3f;
+            audioSource3.time = 0.5f;
             audioSource3.Play();
         }
     }
