@@ -81,15 +81,9 @@ public class SnackController : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.3f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
+            yield return new WaitForSeconds(0.1f);//UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));    //1초부터 5초까지 랜덤으로 떨어짐
             SpawnSnack();
         }
-    }
-
-    public void CatchedSnack(GameObject obj)
-    {
-        int i = Calc(obj.transform.position.x , spawnGap) - leftRange;             
-        canSpawnPoint[i] = true;                                    //간식을 집었으면 다시 그 위치에 떨어질 수 있음
     }
 
     private void SpawnSnack()
@@ -115,10 +109,10 @@ public class SnackController : MonoBehaviour
 
     private void CheckSeat()
     {
-        int seatCount = seat.Length;                                //좌석의 갯수
-        seatLeft = new float[seatCount];                    //좌석의 좌측좌표
-        seatRight = new float[seatCount];                   //좌석의 우측좌표
-        int seatLeftIndex;                                          //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
+        int seatCount = seat.Length;                            //좌석의 갯수
+        seatLeft = new float[seatCount];                        //좌석의 좌측좌표
+        seatRight = new float[seatCount];                       //좌석의 우측좌표
+        int seatLeftIndex;                                      //좌석의 좌측과 우측 사이에 가능한 좌표 Index중 제일 왼쪽거
         int seatRightIndex;
         for(int i = 0; i < seatCount; i++)
         {
@@ -131,6 +125,23 @@ public class SnackController : MonoBehaviour
             {
                 canSpawnPoint[j] = false;       //해당 좌석의 좌측과 우측 사이에 위치한 좌표는 못 떨어지도록
             }
+        }
+    }
+
+    public void CatchedSnack(GameObject obj)
+    {
+        int i = Calc(obj.transform.position.x , spawnGap);             
+        int count = 0;
+        for(int j = 0; j < seat.Length; j++)
+        {    
+            if((i + 1) * spawnGap < seatLeft[j] || seatRight[j] < (i - 1) * spawnGap)
+            {   
+                count++;
+            }
+        }
+        if(count == seat.Length)
+        {
+            canSpawnPoint[i - leftRange] = true;        //간식을 집었으면 다시 그 위치에 떨어질 수 있음
         }
     }
 
@@ -200,7 +211,7 @@ public class SnackController : MonoBehaviour
     {
         return seatRight;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
