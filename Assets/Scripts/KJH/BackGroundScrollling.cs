@@ -7,6 +7,7 @@ public class BackGroundScrollling : MonoBehaviour
 {
     [SerializeField] private Transform[] backgroundImages;
     [SerializeField] private float scrollSpeed;
+
     private Coroutine scrollCoroutine;
 
     private void Start()
@@ -34,6 +35,30 @@ public class BackGroundScrollling : MonoBehaviour
                 backgroundImages[i].position -= scrollVec * Time.deltaTime;
             }
             yield return null;
+        }
+    }
+
+    public void CheckEnterTunnel()
+    {
+        foreach (Transform child in transform)
+        {
+            BackGroundTrigger childBackGroundTrigger = child.GetComponent<BackGroundTrigger>();
+            if (childBackGroundTrigger != null)
+            {
+                childBackGroundTrigger.RunEnterTunnel();
+            }
+        }
+    }
+
+    public void CheckExitTunnel()
+    {
+        foreach (Transform child in transform)
+        {
+            BackGroundTrigger childBackGroundTrigger = child.GetComponent<BackGroundTrigger>();
+            if (childBackGroundTrigger != null)
+            {
+                childBackGroundTrigger.RunExitTunnel();
+            }
         }
     }
 }
