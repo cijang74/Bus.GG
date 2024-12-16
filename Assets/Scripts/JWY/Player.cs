@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
             if(Mouse.current.rightButton.wasPressedThisFrame)
             {
-                StartCoroutine(EatSnack());
+                EatSnack();
             }
         }
 
@@ -131,28 +131,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator EatSnack()
+    private void EatSnack()
     {
-        if(nearbySnack != null && storedSnack == null)
+        if(nearbySnack != null && storedSnack == null && !eatingSnack)
         {
             eatingSnack = true;
-            yield return new WaitForSeconds(nearbySnack.GetTimeToEat());
-            if(nearbySnack == snack)
-            {
-                full += nearbySnack.GetWeight();    // 포만감 증가
-                Debug.Log("스낵 먹음. 포만감: " + full);
-
-                GameObject snackController = GameObject.Find("SnackController");
-                if (snackController != null)
-                {
-                    snackController.GetComponent<SnackController>().CatchedSnack(nearbySnack.gameObject);
-                }
-
-                Destroy(nearbySnack.gameObject);
-                nearbySnack = null;
-                eatingSnack = false;
-            }
+            StartCoroutine(EatSnackCour());
         }
+    }
+
+    private IEnumerator EatSnackCour()
+    {   
+        yield return new WaitForSeconds(nearbySnack.GetTimeToEat());
+        full += nearbySnack.GetWeight();    // 포만감 증가
+        Debug.Log("스낵 먹음. 포만감: " + full);
+
+        GameObject snackController = GameObject.Find("SnackController");
+        if (snackController != null)
+        {
+            snackController.GetComponent<SnackController>().CatchedSnack(nearbySnack.gameObject);
+        }
+
+        Destroy(nearbySnack.gameObject);
+        nearbySnack = null;
+        eatingSnack = false;
     }
 
     private void SpitOutSnack()
