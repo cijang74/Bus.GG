@@ -18,7 +18,6 @@ public class SnackController : MonoBehaviour
 
     int whatSnackNum;
     GameObject toSpawnSnack;
-    bool isJam = false;
 
     float left;
     float right;
@@ -149,7 +148,6 @@ public class SnackController : MonoBehaviour
         else
         {
             toSpawnSnack = jam;
-            isJam = true;
         }
     }
 
