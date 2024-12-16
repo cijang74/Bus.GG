@@ -5,7 +5,7 @@ using UnityEngine;
 public class DangerSystem : MonoBehaviour
 {
     private Transform target;
-    private Player player; // Player 스크립트 참조
+    private Player playerScript; // Player 스크립트를 참조할 변수
 
     [SerializeField] private float dangerZoneDuration = 2f;
     [SerializeField] private float spawnHeight = 1f;
@@ -15,15 +15,46 @@ public class DangerSystem : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        // Player 오브젝트 및 Player 스크립트 참조
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            target = playerObject.transform;
+            playerScript = playerObject.GetComponent<Player>();
+        }
+        else
+        {
+            Debug.LogError("Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
+        }
+
+        // 코루틴 시작
+        StartCoroutine(WaitForPlayerInitialization());
+    }
+
+    private IEnumerator WaitForPlayerInitialization()
+    {
+        // Player의 isSafe 값이 유효해질 때까지 대기
+        while (playerScript != null && playerScript.isSafe == false)
+        {
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 초기화 완료 후 코루틴 시작
         StartCoroutine(SpawnToyAtIntervals());
     }
 
     private void Drop()
     {
-        Debug.Log("Ooops!");
-
-        StartCoroutine(DrawDangerZoneAtPlayer());
+        // 플레이어가 안전 영역에 있는지 확인
+        if (playerScript != null && !playerScript.isSafe)
+        {
+            Debug.Log("Ooops! Danger Dropped!");
+            StartCoroutine(DrawDangerZoneAtPlayer());
+        }
+        else
+        {
+            Debug.Log("플레이어가 안전 영역에 있음: Drop 건너뜀");
+        }
     }
 
     private IEnumerator DrawDangerZoneAtPlayer()
@@ -79,10 +110,7 @@ public class DangerSystem : MonoBehaviour
     {
         while (true)
         {
-            if (player != null && !player.isSafe)
-            {
-                Drop(); // 플레이어가 안전하지 않을 때만 Drop 실행
-            }
+            Drop();
             // 다음 생성까지 대기 (3~5초 사이의 랜덤 값)
             float interval = Random.Range(minSpawnInterval, maxSpawnInterval);
             yield return new WaitForSeconds(interval);
