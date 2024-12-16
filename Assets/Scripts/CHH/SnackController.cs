@@ -25,7 +25,7 @@ public class SnackController : MonoBehaviour
 
     float left;
     float right;
-    float spawnGap = 0.1f;
+    float spawnGap = 0.3f;
     
     int leftRange;
     int rightRange;
