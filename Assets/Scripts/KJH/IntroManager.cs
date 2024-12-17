@@ -22,7 +22,7 @@ public class IntroManager : MonoBehaviour
     {
         animator = FindAnyObjectByType<Animator>();
         noInstanceFade = GetComponent<NoInstanceFade>();
-
+        Application.targetFrameRate = 60;
     }
     
     private void FixedUpdate() 
