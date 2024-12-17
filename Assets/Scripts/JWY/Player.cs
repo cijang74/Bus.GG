@@ -259,6 +259,7 @@ public class Player : Singleton<Player>
         {
             Debug.Log("사망!");
             SceneManager.LoadScene("GameOver");
+            
         }
     }
 
