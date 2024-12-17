@@ -137,6 +137,7 @@ public class Player : Singleton<Player>
             else
             {
                 Debug.Log("포만감이 0입니다.");
+                SceneManager.LoadScene("GameOver");
             }
 
             timeSineLastDecrease = 0f;
