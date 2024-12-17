@@ -35,7 +35,7 @@ public class SnackController : MonoBehaviour
     float[] seatRight;
 
     float minSpawnDelay = 1f;
-    float maxSpawnDelay = 4f;
+    float maxSpawnDelay = 6f;
 
 
     bool[] canSpawnPoint;       //-8 ~ 8에 간격 1이라면 index 0번은 -8을 가리킴. 위치 - left = index
