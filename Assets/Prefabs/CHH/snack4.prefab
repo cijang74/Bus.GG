@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snackPrefab: {fileID: 8919354751561545561}
-  weight: 4
-  timeToEat: 1.1
+  weight: 6
+  timeToEat: 1.3
 --- !u!50 &4194354710017320168
 Rigidbody2D:
   serializedVersion: 4

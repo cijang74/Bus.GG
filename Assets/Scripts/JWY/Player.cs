@@ -183,7 +183,7 @@ public class Player : Singleton<Player>
             storedSnack = nearbySnack;
             storedSnack.Consume();
             Debug.Log("스낵 저장: " + storedSnack.name);
-            runSpeed *= ((10 - storedSnack.GetWeight()) / 10.0f);
+            runSpeed *= ((12 - storedSnack.GetWeight()) / 10.0f);
         }
         else if (storedSnack != null)
         {
@@ -248,7 +248,7 @@ public class Player : Singleton<Player>
             Vector3 spitPosition = transform.position + new Vector3(storedSnack.transform.localScale.x, storedSnack.transform.localScale.y, 0f); // 플레이어 오른쪽에 스낵을 뱉음
             storedSnack.SpitOut(spitPosition);
             
-            runSpeed /= ((10 - storedSnack.GetWeight()) / 10.0f);
+            runSpeed /= ((12 - storedSnack.GetWeight()) / 10.0f);
             storedSnack = null;
         }
     }
