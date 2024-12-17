@@ -11,6 +11,11 @@ public class StartMenu : MonoBehaviour
         Debug.Log("게임 시작!");
     }
 
+    public void StartIntro()
+    {
+        SceneManager.LoadScene("Intro");
+    }
+
     // 게임 설명 버튼
     public void ShowGameDescription()
     {
