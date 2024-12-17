@@ -3637,8 +3637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fontTypingSpeed: 0.05
   _keyCodeSkipDialogue: 32
-  _dialogueFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  _fontColor: {r: 1, g: 1, b: 1, a: 1}
+  _dialogueFont: {fileID: 12800000, guid: 5136e9d554892b948ae03cfce50dcd7d, type: 3}
+  _fontColor: {r: 0, g: 0, b: 0, a: 1}
   _dialogueContents:
   - {fileID: 49327355}
   _firstDialogueContent: {fileID: 49327355}
@@ -3870,7 +3870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4758,8 +4758,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fontTypingSpeed: 0.05
   _keyCodeSkipDialogue: 32
-  _dialogueFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  _fontColor: {r: 1, g: 1, b: 1, a: 1}
+  _dialogueFont: {fileID: 12800000, guid: 5136e9d554892b948ae03cfce50dcd7d, type: 3}
+  _fontColor: {r: 0, g: 0, b: 0, a: 1}
   _dialogueContents:
   - {fileID: 0}
   _firstDialogueContent: {fileID: 570614326}
@@ -4989,7 +4989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

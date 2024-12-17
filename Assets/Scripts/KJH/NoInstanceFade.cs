@@ -47,7 +47,7 @@ public class NoInstanceFade : MonoBehaviour
         }
         if(fadeScreen.color.a == 1)
         {
-            SceneManager.LoadScene("merge_4");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }
