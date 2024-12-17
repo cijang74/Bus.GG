@@ -55,4 +55,5 @@ MonoBehaviour:
   snack3: {fileID: 8284505779185992780, guid: 1b88aacee625d924395f859a96b74ed4, type: 3}
   snack4: {fileID: 8919354751561545561, guid: 3c8db454017e06940ac19beb8c9006e4, type: 3}
   snack5: {fileID: 3686922298392650859, guid: b57d2fafd63abf74780f7869b06f309b, type: 3}
+  speedItem: {fileID: 1369275303892637530, guid: dddef5d154191ca419684f6088406519, type: 3}
   shadowPrefab: {fileID: 8116944242076259158, guid: 49e75d8498bea43449272e6ac5d33838, type: 3}
