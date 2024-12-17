@@ -258,7 +258,7 @@ public class Player : Singleton<Player>
         if(isLight && !isSafe)
         {
             Debug.Log("사망!");
-            SceneManager.LoadScene("Ending");
+            SceneManager.LoadScene("GameOver");
         }
     }
 

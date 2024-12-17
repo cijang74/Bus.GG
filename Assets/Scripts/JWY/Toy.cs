@@ -56,7 +56,7 @@ public class Toy : MonoBehaviour
         {
             // 플레이어와 충돌 시
             Debug.Log("사망!");
-            SceneManager.LoadScene("Ending");
+            SceneManager.LoadScene("GameOver");
         }
     }
 

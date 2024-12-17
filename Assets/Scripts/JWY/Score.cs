@@ -3,28 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText; // TextMeshProUGUI ÂüÁ¶
+    [SerializeField] private TextMeshProUGUI scoreText; // TextMeshProUGUI ï¿½ï¿½ï¿½ï¿½
     private int score = 0;
     private float timer = 0f;
 
     void Start()
     {
-        // ÃÊ±â ½ºÄÚ¾î ¼³Á¤
+        // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         UpdateScoreUI();
     }
 
     void Update()
     {
-        // 1ÃÊ¸¶´Ù ½ºÄÚ¾î Áõ°¡
+        // 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         timer += Time.deltaTime;
         if (timer >= 0.2f)
         {
-            score += 1; // ½ºÄÚ¾î Áõ°¡
-            UpdateScoreUI(); // UI ¾÷µ¥ÀÌÆ®
-            timer = 0f; // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+            score += 1; // ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+            UpdateScoreUI(); // UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+            timer = 0f; // Å¸ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­
+        }
+
+        if(score > 1000)
+        {
+            SceneManager.LoadScene("Ending");
         }
     }
 
@@ -32,11 +38,11 @@ public class Score : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score; // ½ºÄÚ¾î ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+            scoreText.text = "Score: " + score; // ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         }
         else
         {
-            Debug.LogWarning("Score TextMeshProUGUI°¡ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù!");
+            Debug.LogWarning("Score TextMeshProUGUIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½!");
         }
     }
 }
