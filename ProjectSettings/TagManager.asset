@@ -12,6 +12,7 @@ TagManager:
   - TunnelEnterence
   - Confinder
   - Manager
+  - Item
   layers:
   - Default
   - TransparentFX

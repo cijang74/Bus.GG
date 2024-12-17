@@ -154,6 +154,16 @@ public class Player : Singleton<Player>
                 Debug.Log("스낵 근처: " + snack.name);
             }
         }
+        else if(other.gameObject.CompareTag("Item"))
+        {
+            snack = other.gameObject.GetComponent<Snack>();
+
+            if (snack != null && nearbySnack == null) // 중복 저장 방지
+            {
+                nearbySnack = snack;
+                Debug.Log("스낵 근처: " + snack.name);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -168,7 +178,7 @@ public class Player : Singleton<Player>
 
     private void StoreSnack()
     {
-        if (storedSnack == null && nearbySnack != null)
+        if (storedSnack == null && nearbySnack != null && !nearbySnack.CompareTag("Item"))
         {
             storedSnack = nearbySnack;
             storedSnack.Consume();
@@ -185,11 +195,11 @@ public class Player : Singleton<Player>
     {
         if(nearbySnack != null && storedSnack == null && !eatingSnack)
         {
-            if(nearbySnack.GetWeight() != 6)
+            if(!nearbySnack.CompareTag("Item"))
             {
                 eatingSnack = true;
-                StartCoroutine(EatSnackCour());
             }
+            StartCoroutine(EatSnackCour());
         }
     }
 
@@ -197,20 +207,37 @@ public class Player : Singleton<Player>
     {   
         Snack Snacked = nearbySnack;
 
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEatSound();
-        yield return new WaitForSeconds(Snacked.GetTimeToEat());
-
-        if (snackController != null)
+        if(!eatingSnack)
         {
-            snackController.GetComponent<SnackController>().CatchedSnack(Snacked.gameObject);
+            Destroy(Snacked.gameObject);
+            nearbySnack = null;
+            runSpeed *= 1.3f;
+
+            if (snackController != null)
+            {
+                snackController.GetComponent<SnackController>().CatchedSnack(Snacked.gameObject);
+            }
+            
+            yield return new WaitForSeconds(10f);
+            runSpeed /= 1.3f;
         }
+        else
+        {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEatSound();
+            yield return new WaitForSeconds(Snacked.GetTimeToEat());
 
-        full = Mathf.Min(full + Snacked.GetWeight(), 100);    // 포만감 증가, 최대값 100 유지
-        Debug.Log("스낵 먹음. 포만감: " + full);
+            if (snackController != null)
+            {
+                snackController.GetComponent<SnackController>().CatchedSnack(Snacked.gameObject);
+            }
 
-        Destroy(Snacked.gameObject);
-        nearbySnack = null;
-        eatingSnack = false;
+            full = Mathf.Min(full + Snacked.GetWeight(), 100);    // 포만감 증가, 최대값 100 유지
+            Debug.Log("스낵 먹음. 포만감: " + full);
+
+            Destroy(Snacked.gameObject);
+            nearbySnack = null;
+            eatingSnack = false;
+        }
     }
 
     private void SpitOutSnack()
